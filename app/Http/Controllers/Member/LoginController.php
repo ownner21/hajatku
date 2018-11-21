@@ -15,7 +15,7 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['logout']);
+        $this->middleware('web')->except(['logout']);
     }
     public function showLoginForm()
     {
@@ -38,7 +38,7 @@ class LoginController extends Controller
         ];
 
         // Attempt to log the user in
-        if (Auth::guard('web')->attempt($credential, false)){
+        if (Auth::guard()->attempt($credential, $credential)){
             // If login succesful, then redirect to their intended location
             return redirect()->intended(route('member.home'));
         }
@@ -63,7 +63,7 @@ class LoginController extends Controller
             'password' => $data->password
         ];
 
-        if (Auth::guard('web')->attempt($credential, $data)){
+        if (Auth::guard()->attempt($credential, $data)){
             return redirect()->intended(route('member.home'));
         }
         return redirect('/member');
