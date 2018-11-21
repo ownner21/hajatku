@@ -85,7 +85,7 @@
           {{ csrf_field() }}
 
           <div class="form-group">
-            <label for="wilayah" class="control-label">Wilayah:</label>
+            <label for="wilayah" class="control-label">Bank:</label>
              <select class="form-control" name="bank" required>
               <option selected disabled> Pilih Bank</option>
               <option class="Mandiri">Mandiri</option>

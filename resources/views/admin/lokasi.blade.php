@@ -77,7 +77,7 @@
             <input type="text" class="form-control" id="wilayah" name="wilayah" placeholder="Wilayah">
           </div>
           <div class="form-group">
-            <label for="lokasi" class="control-label">Status:</label>
+            <label for="lokasi" class="control-label">Lokasi:</label>
             <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Lokasi">
           </div>
       </div>

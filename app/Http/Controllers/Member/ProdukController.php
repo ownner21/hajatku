@@ -33,6 +33,15 @@ class ProdukController extends Controller
         $produk->fill($request->all());
     	$produk['id_member'] = Auth::user()->id;
     	$produk->save();
+
+        $stok = new StokProduk;
+        $stok['id_produk'] = $produk->id;
+        $stok['stok_awal'] = 0;
+        $stok['debit'] = $request->stokawal;
+        $stok['stok_akhir'] = $request->stokawal;
+        $stok['keterangan'] = 'Stok Awal Membuat Produk';
+        $stok->save();
+
     	return redirect('member/produk/edit/'.$produk->id)->with('success', 'Silahkan Melakukan Penambahan Foto Produk');	
     }
     public function edit($id_produk)
@@ -119,6 +128,27 @@ class ProdukController extends Controller
     	}
     	$gambars->delete();
     	return view('member/produk')->with('success', 'Berhasil Hapus Produk');
+    }
+    public function stokproduk($id_produk)
+    {
+        $stoks = StokProduk::where('id_produk', $id_produk)->orderBy('id','DESC')->get();
+        $stokskarang = StokProduk::where('id_produk', $id_produk)->orderBy('id','DESC')->select('stok_akhir')->first();
+        return view('member.produk-stok', compact('stoks', 'id_produk', 'stokskarang'));
+    }
+    public function storestok(Request $request)
+    {
+        $stokawal = StokProduk::where('id_produk', $request->id_produk)->orderBy('id', 'DESC')->select('stok_akhir')->first();
+        $stokawal = (!empty($stokawal))? $stokawal->stok_akhir : 0;
+        
+        $stok = new StokProduk;
+        $stok['id_produk'] = $request->id_produk;
+        $stok['stok_awal'] = $stokawal;
+        $stok['debit'] = $request->debit;
+        $stok['stok_akhir'] = $request->debit+$stokawal;
+        $stok['keterangan'] = 'Tambah Stok oleh Member';
+        $stok->save();
+
+        return back()->with('success', 'Berhasil Tambah Stok');
     }
 
 }

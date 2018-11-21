@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Produk;
 
 class MemberController extends Controller
 {
@@ -16,6 +17,7 @@ class MemberController extends Controller
     }
     public function index()
     {
-    	return view('member.member-dasboard');
+    	$produks = Produk::all();
+    	return view('member.member-dasboard', compact('produks'));
     }
 }

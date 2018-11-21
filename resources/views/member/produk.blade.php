@@ -9,7 +9,6 @@
           <span style="float: right">
 
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">Tambah Produk</button>
-            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-info-sm">Info</button>
 
           </span>
           </div>
@@ -32,9 +31,9 @@
             <thead>
               <tr>
                 <th style="text-align: center">#</th>
-                <th>Bank</th>
-                <th>Nominal</th>
-                <th>Status</th>
+                <th>Nama Produk</th>
+                <th>Deskripsi</th>
+                <th>Harga</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -53,6 +52,7 @@
                     <form id="hapus-form{{$produk->id}}" action="{{ route('produk.hapus', ['id'=> $produk->id]) }}" method="POST" style="display: none;">
                         {{ csrf_field() }}{{ method_field('DELETE') }}
                     </form>
+                  <a href="{{url('member/produk/stok/'.$produk->id)}}" class="btn btn-info btn-sm">Stok</a>
                 </td>
               </tr>
               @endforeach
@@ -75,36 +75,36 @@
           <div class="form-group row">
             <label for="nama_produk" class="col-md-3 control-label">Nama Produk</label>
             <div class="col-md-8">
-            <input type="text" class="form-control" name="nama_produk" placeholder="Nama Produk" value="{{old('nama_produk')}}">
+            <input type="text" class="form-control" name="nama_produk" placeholder="Nama Produk" value="{{old('nama_produk')}}" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="deskripsi" class="col-md-3 control-label">Deskripsi Produk</label>
             <div class="col-md-8">
-            <textarea type="text" class="form-control" name="deskripsi" placeholder="Deskripsi Produk">{{old('deskripsi')}}</textarea>
+            <textarea type="text" class="form-control" name="deskripsi" placeholder="Deskripsi Produk" required>{{old('deskripsi')}}</textarea>
             </div>
           </div>
           <div class="form-group row">
             <label for="lokasi" class="col-md-3 control-label">Lokasi Produk</label>
             <div class="col-md-8">
-            <input type="text" class="form-control" name="lokasi" placeholder="Lokasi Produk" value="{{old('lokasi')}}">
+            <input type="text" class="form-control" name="lokasi" placeholder="Lokasi Produk" value="{{old('lokasi')}}" required>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="min_pemesanan" class="col-md-3 control-label">Pemesanan</label>
             <div class="col-md-4">
-            <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" value="{{old('min_pemesanan')}}">
+            <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" value="{{old('min_pemesanan')}}" required>
             </div>
             <div class="col-md-4">
-            <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" value="{{old('max_pemesanan')}}">
+            <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" value="{{old('max_pemesanan')}}" required>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="harga" class="col-md-3 control-label">Harga Produk</label>
             <div class="col-md-8">
-            <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{old('harga')}}">
+            <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{old('harga')}}" required>
             </div>
           </div>
           <div class="form-group row">
@@ -123,6 +123,13 @@
               <option value="{{$kategori->id}}">{{$kategori->kategori}}</option>
               @endforeach
             </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="stokawal" class="col-md-3 control-label">Stok Awal</label>
+            <div class="col-md-8">
+            <input type="text" class="form-control" name="stokawal" placeholder="Stok Awal" value="{{old('stokawal')}}" required>
             </div>
           </div>
 

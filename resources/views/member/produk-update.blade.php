@@ -164,7 +164,7 @@
             <label for="id_lokasi" class="col-md-3 control-label">Lokasi</label>
             <div class="col-md-8">
             <select class="form-control" id="id_lokasi" name="id_lokasi" required>
-              <option selected disabled> Pilih Kategori</option>
+              <option selected disabled> Pilih Lokasi</option>
               @foreach($lokasis as $lokasi)
               <option value="{{$lokasi->id}}"><b>{{$lokasi->wilayah}}</b> - {{$lokasi->lokasi}}</option>
               @endforeach
