@@ -17,11 +17,7 @@
 </head>
 <body>
     <div id="app">
-<<<<<<< HEAD
         <nav class="navbar navbar-default navbar-static-top" style="background-color: black;">
-=======
-        <nav class="navbar navbar-default navbar-static-top" style="background-color: gold">
->>>>>>> 5f6a2b5e4069c17b466b180ea9787ecfee777717
             <div class="container">
                 <div class="navbar-header">
 

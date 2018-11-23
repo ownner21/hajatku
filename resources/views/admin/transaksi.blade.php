@@ -52,7 +52,7 @@
                 <td>{{$transaksi->waktu_konfirmasi}}</td>
                 <td>{{$transaksi->status}}</td>
                 <td>
-                  <a href="{{url('member/transaksi/tracking/'.$transaksi->id)}}" class="btn btn-default btn-sm">Tracking</a>
+                  <a href="{{url('admin/transaksi/tracking/'.$transaksi->id)}}" class="btn btn-default btn-sm">Tracking</a>
                   
                 </td>
               </tr>
