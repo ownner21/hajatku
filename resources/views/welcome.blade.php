@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel Start
+                    Laravel Start Edit
                 </div> 
 
                 <p>Ojo bingun lan ojo gupuh, Seng Penting Yakin</p>

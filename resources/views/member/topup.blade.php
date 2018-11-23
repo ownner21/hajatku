@@ -8,8 +8,9 @@
 
           <span style="float: right">
 
+            <a href="{{url('member/saldo')}}" class="btn btn-sm btn-warning">Saldo</a>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">Topup</button>
-            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-info-sm">Info</button>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target=".bs-example-info-sm">Info</button>
 
           </span>
           </div>

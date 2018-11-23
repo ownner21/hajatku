@@ -79,6 +79,13 @@
           </div>
 
           <div class="form-group row">
+            <label for="harga" class="col-md-3 control-label">Harga Paket</label>
+            <div class="col-md-8">
+            <input type="number" class="form-control" name="harga" placeholder="Harga Paket" value="{{old('harga')}}" required>
+            </div>
+          </div>
+
+          <div class="form-group row">
             <label for="lokasi" class="col-md-3 control-label">Lokasi Paket</label>
             <div class="col-md-8">
             <select class="form-control" id="lokasi" name="lokasi" required>

@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('css')
 </head>
 <body>
     <div id="app">
@@ -36,7 +37,6 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -63,6 +63,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a href="{{url('member/cart')}}">Cart <span class="badge"> {{Cart::count()}}</span></a></li>
                         @endif
                     </ul>
                 </div>
@@ -77,6 +78,7 @@
                       <a href="{{url('member/produk')}}" class="list-group-item">Produk</a>
                       <a href="{{url('member/paket')}}" class="list-group-item">Paket</a>
                       <a href="{{url('member/transaksi')}}" class="list-group-item">Transaksi</a>
+                      <a href="{{url('member/penjualan')}}" class="list-group-item">Penjualan</a>
                     </div>
                 </div>
                 <div class="col-sm-9">

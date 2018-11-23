@@ -4,8 +4,8 @@
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">{{$paket->nama_produk}} 
-
+          <div class="panel-heading">
+            <b>Deskripsi Detail Paket</b>
           </div>
           <div class="panel-body">
               @if (session('success'))
@@ -15,10 +15,7 @@
               @endif
               
               <div class="row">
-                <div class="col-md-3 col-sm-12">
-                  
-                </div>
-                <div class="col-md-9 col-sm-12">
+                <div class="col-sm-12">
                  <table class="table">
                    <tr>
                      <th>Nama Paket</th>
@@ -37,9 +34,6 @@
                    </tr>
                  </table>
 
-                 <hr>
-
-                 Isi Paket
                   <table class="table">
                     <tr>
                         <th>Produk</th>
@@ -51,6 +45,17 @@
                         <td>{{$isipaket->nama_produk}}</td>
                         <td>{{$isipaket->harga}}</td>
                         <td>{{$isipaket->deskripsi}}</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2">
+                          <?php
+                            $produkgambars = App\Models\ProdukGambar::where('id_produk', $isipaket->id_produk)->get();
+                          ?>
+                            @foreach($produkgambars as $produkgambar)
+                              <img src="{{asset('images/produk/'.$produkgambar->gambar)}}" class="img-thumbnails" alt="..." width="100px">
+                            @endforeach
+                        </td>
                       </tr>
                     </tr>
                     @endforeach

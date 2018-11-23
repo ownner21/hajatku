@@ -1,6 +1,14 @@
 @extends('admin.admin-template')
 
+@section('css')
+<style type="text/css">
+  
+</style>
+@endsection
+
+
 @section('content')
+
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
@@ -13,7 +21,7 @@
                   </div>
               @endif
 
-              You are logged in!
+              You are logged in! edit disini
           </div>
       </div>
     </div>

@@ -28,6 +28,8 @@ Route::post('/produk/stok', 'Member\ProdukController@storestok')->name('stok.tam
 Route::get('/topup', 'Member\TopupController@index');
 Route::post('/topup', 'Member\TopupController@store')->name('topup.tambah');
 
+Route::get('/saldo', 'Member\TopupController@laporan');
+
 Route::get('/paket', 'Member\PaketController@index');
 Route::get('/paket/id/{id_paket}', 'Member\PaketController@paketid');
 Route::post('/paket', 'Member\PaketController@store')->name('paket.tambah');
@@ -43,5 +45,17 @@ Route::post('/paket/pengiriman', 'Member\PaketController@storepengiriman')->name
 Route::put('/paket/pengiriman/update', 'Member\PaketController@updatepengiriman')->name('paket.pengiriman.update');
 Route::get('/paket/pengiriman/delete/{id}', 'Member\PaketController@hapuspengiriman');
 
+Route::get('/cart', 'Member\CartController@index');
+Route::get('/cart/store/produk/{id}', 'Member\CartController@tambahproduk');
+Route::get('/cart/remove/{id}', 'Member\CartController@remove');
+Route::get('/cart/removeall', 'Member\CartController@removeall');
+Route::get('/cart/lunasi', 'Member\CartController@lunasi');
 
+Route::get('/transaksi', 'Member\TransaksiController@index');
+Route::get('/transaksi/tracking/{id}', 'Member\TransaksiController@transaksiid');
 
+Route::get('/penjualan', 'Member\PenjualanController@index');
+Route::get('/penjualan/tracking/{id}', 'Member\PenjualanController@penjualanid');
+Route::get('/penjualan/konfirmasi/{id}', 'Member\PenjualanController@konfirmasi');
+Route::get('/penjualan/tidaksiap/{id}', 'Member\PenjualanController@tidaksiap');
+Route::get('/penjualan/pengerjaan/{id}', 'Member\PenjualanController@pengerjaan');

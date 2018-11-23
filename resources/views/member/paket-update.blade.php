@@ -27,6 +27,13 @@
                   </div>
 
                   <div class="form-group row">
+                    <label for="harga" class="col-md-3 control-label">Harga Paket</label>
+                    <div class="col-md-8">
+                    <input type="number" class="form-control" name="harga" placeholder="Harga Paket" value="{{$paket->harga}}">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
                     <label for="deskripsi" class="col-md-3 control-label">Deskripsi Produk</label>
                     <div class="col-md-8">
                     <textarea type="text" class="form-control" name="deskripsi" placeholder="Deskripsi Produk">{{$paket->deskripsi}}</textarea>

@@ -2,10 +2,10 @@
 
 @section('content')
   <div class="row">
-    @if (session('status'))
+    @if (session('success'))
       <div class="col-sm-12">
         <div class="alert alert-success">
-            {{ session('status') }}
+            {{ session('success') }}
         </div>
       </div>
     @endif
@@ -35,8 +35,9 @@
           <div class="caption">
             <h3>{{$produk->nama_produk}}</h3>
             <p>{{$produk->deskripsi}}</p>
+            <p>Harga <b>{{$produk->harga}}</b></p>
             <p>
-              <a href="#" class="btn btn-primary" role="button">Beli</a>
+              <a href="{{url('member/cart/store/produk/'.$produk->id)}}" class="btn btn-primary" role="button">Beli</a>
               <a href="#" class="btn btn-default" role="button">Detail</a></p>
           </div>
         </div>

@@ -22,3 +22,5 @@ Route::get('/member/aktif/{id}', 'Admin\MemberController@aktif');
 Route::get('/topup', 'Admin\TopupController@index');
 Route::put('/topup/lunas/{id}', 'Admin\TopupController@lunas')->name('topup.konfirmasi');
 Route::put('/topup/gagal/{id}', 'Admin\TopupController@gagal')->name('topup.gagal');
+
+Route::get('/transaksi', 'Admin\TransaksiController@index');

@@ -30,4 +30,10 @@ class TopupController extends Controller
         $topup->save();
         return back()->with('success', 'Berhasil Melakukan Topup silahkan melunasi pada nomor Rekening 812918201289');
     }
+    public function laporan()
+    {
+        $saldomember = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->select('saldo_akhir')->first();
+        $saldos = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->get();
+        return view('member.saldo', compact('saldomember','saldos'));
+    }
 }

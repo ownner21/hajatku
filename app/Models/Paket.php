@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Paket extends Model
 {
      protected $fillable = [
-	    'id_member','nama_paket','lokasi', 'deskripsi'
+	    'id_member','nama_paket','lokasi', 'deskripsi', 'harga'
     ];
 }

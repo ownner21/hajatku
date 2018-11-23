@@ -18,6 +18,7 @@ class CreatePaketsTable extends Migration
             $table->integer('id_member');
             $table->string('nama_paket');
             $table->text('deskripsi');
+            $table->integer('harga')->nullable();
             $table->text('lokasi')->nullable();
             $table->timestamps();
         });
