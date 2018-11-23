@@ -65,7 +65,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height" style="background-color: gold">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
@@ -79,7 +79,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
+<<<<<<< HEAD
                     Laravel Start Edit
+=======
+                    Hajatku
+>>>>>>> 5f6a2b5e4069c17b466b180ea9787ecfee777717
                 </div> 
 
                 <p>Ojo bingun lan ojo gupuh, Seng Penting Yakin</p>
