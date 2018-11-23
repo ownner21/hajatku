@@ -18,7 +18,7 @@
               @endif
               
               <div class="row">
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-20 col-md-4">
                    Daftar Member yang telah bergabung
                 </div>
               </div>
