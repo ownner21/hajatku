@@ -27,7 +27,7 @@ class CreateProdukPemesanansTable extends Migration
             $table->timestamp('waktu_konfirmasi')->nullable();
             $table->timestamp('waktu_kembali')->nullable();
             $table->timestamp('waktu_pengerjaan')->nullable();
-            $table->timestamp('waktu_Pengiriman')->nullable();
+            $table->timestamp('waktu_pengiriman')->nullable();
             $table->timestamp('waktu_selesai')->nullable();
             $table->enum('status',['Pesan', 'Konfirmasi','Pengerjaan','Pengiriman', 'Kembali', 'Selesai'])->default('Pesan');
         });

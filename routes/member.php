@@ -53,9 +53,11 @@ Route::get('/cart/lunasi', 'Member\CartController@lunasi');
 
 Route::get('/transaksi', 'Member\TransaksiController@index');
 Route::get('/transaksi/tracking/{id}', 'Member\TransaksiController@transaksiid');
+Route::get('/transaksi/selesai/{id}', 'Member\TransaksiController@selesai');
 
 Route::get('/penjualan', 'Member\PenjualanController@index');
 Route::get('/penjualan/tracking/{id}', 'Member\PenjualanController@penjualanid');
 Route::get('/penjualan/konfirmasi/{id}', 'Member\PenjualanController@konfirmasi');
 Route::get('/penjualan/tidaksiap/{id}', 'Member\PenjualanController@tidaksiap');
 Route::get('/penjualan/pengerjaan/{id}', 'Member\PenjualanController@pengerjaan');
+Route::get('/penjualan/pengiriman/{id}', 'Member\PenjualanController@pengiriman');

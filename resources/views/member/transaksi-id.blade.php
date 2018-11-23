@@ -75,15 +75,19 @@
 
           </span>
           </div>
+          @if(!empty($transaksi->waktu_pengiriman) && empty($transaksi->waktu_selesai))
           <div class="panel-body">
               
               <div class="row">
-                <div class="col-sm-12">
-                   
+                <div class="col-sm-8">
+                    Silahkan Mengkonfirmasi Pembelian Anda
+                </div>
+                <div class="col-sm-4" style="text-align: right;">
+                   <a href="{{url('member/transaksi/selesai/'.$transaksi->id)}}" class="btn btn-danger btn-lg">Pesanan Diterima</a>
                 </div>
               </div>
-             
           </div>
+          @endif
           <table class="table">
             <tr>
               <th>Nomor Transaksi</th>

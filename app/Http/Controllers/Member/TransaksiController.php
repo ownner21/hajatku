@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Produk;
 use App\Models\Paket;
 use App\Models\ProdukPemesanan;
+use App\Models\Saldo;
+use Carbon\Carbon;
 
 class TransaksiController extends Controller
 {
@@ -25,5 +27,27 @@ class TransaksiController extends Controller
     {
     	$transaksi = ProdukPemesanan::find($id);
     	return view('member.transaksi-id', compact('transaksi'));
+    }
+    public function selesai($id)
+    {
+        $penjualan = ProdukPemesanan::find($id);
+        $penjualan['waktu_selesai'] = Carbon::now();
+        $penjualan['status'] = 'Selesai';
+        $penjualan->save();
+
+        $nomortransaksi = sprintf("%05d", $penjualan->id);
+        $saldomember = Saldo::where(['id_member'=> $penjualan->id_penjual])->orderBy('id', 'DESC')->select('saldo_akhir')->first();
+        $saldomasuk = $penjualan->total_bayar/2;
+        $namaproduk = (!empty($penjualan->nama_produk))? $penjualan->nama_produk : $penjualan->nama_paket;
+
+        $saldo = new Saldo;
+        $saldo['id_member'] = $penjualan->id_penjual;
+        $saldo['saldo_awal'] = $saldomember->saldo_akhir;
+        $saldo['debit'] = $saldomasuk;
+        $saldo['saldo_akhir'] = $saldomember->saldo_akhir+$saldomasuk;
+        $saldo['keterangan'] = 'Saldo Bertambah Transaksi Berhasil (Pembelian '.$namaproduk.') ['.$nomortransaksi.'] (Tahap 2)';
+        $saldo->save();
+        return back()->with('success', 'Berhasil Menolak Pemesanan');
+        
     }
 }

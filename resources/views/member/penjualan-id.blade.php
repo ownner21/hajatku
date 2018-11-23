@@ -80,17 +80,23 @@
               <div class="row">
                 <div class="col-sm-8">
                   @if(empty($penjualan->waktu_konfirmasi) && empty($penjualan->waktu_kembali))
-                  Lakukan Konfirmasi Siap Melayani Pelanggan dengan cara klik tombol "Konfirmasi", Jika tidak siap klik tombol "Tidak Siap". 
-                  @elseif(!empty($penjualan->waktu_konfirmasi))
-                  Jika Pemesanan siap diproses silahkan klik pada tombol di samping kanan
+                    Lakukan Konfirmasi Siap Melayani Pelanggan dengan cara klik tombol "Konfirmasi", Jika tidak siap klik tombol "Tidak Siap". 
+                  @elseif(!empty($penjualan->waktu_konfirmasi ) && empty($penjualan->waktu_pengerjaan))
+                    Jika Pemesanan siap diproses silahkan klik pada tombol di samping kanan
+                  @elseif(!empty($penjualan->waktu_pengerjaan) && empty($penjualan->waktu_pengiriman))
+                    Update Pemesanan ke Pengiriman
+                  @elseif(!empty($penjualan->waktu_pengiriman) && empty($penjualan->waktu_selesai))
+                    Menunggu Konfirmasi Selesai dari Pembeli
                   @endif
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4" style="text-align: right;">
                   @if(empty($penjualan->waktu_konfirmasi) && empty($penjualan->waktu_kembali))
                    <a href="{{url('member/penjualan/konfirmasi/'.$penjualan->id)}}" class="btn btn-primary btn-lg">Konfirmasi</a>
                    <a href="{{url('member/penjualan/tidaksiap/'.$penjualan->id)}}" class="btn btn-danger btn-lg">Tidak Siap</a>
-                  @elseif(!empty($penjualan->waktu_konfirmasi))
+                  @elseif(!empty($penjualan->waktu_konfirmasi) && empty($penjualan->waktu_pengerjaan))
                    <a href="{{url('member/penjualan/pengerjaan/'.$penjualan->id)}}" class="btn btn-danger btn-lg">Siap Dikerjakan</a>
+                  @elseif(!empty($penjualan->waktu_pengerjaan) && empty($penjualan->waktu_pengiriman))
+                   <a href="{{url('member/penjualan/pengiriman/'.$penjualan->id)}}" class="btn btn-danger btn-lg">Siap Dikirim</a>
                   @endif
                 </div>
               </div>
@@ -144,6 +150,7 @@
             </tr>
              
           </table>
+
       </div>
     </div>
   </div>

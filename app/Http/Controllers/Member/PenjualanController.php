@@ -76,9 +76,18 @@ class PenjualanController extends Controller
 	    $saldo['saldo_awal'] = $saldomember->saldo_akhir;
 	    $saldo['debit'] = $saldomasuk;
 	    $saldo['saldo_akhir'] = $saldomember->saldo_akhir+$saldomasuk;
-	    $saldo['keterangan'] = 'Saldo Bertambah Konrimasi Penjualan (Pembelian '.$namaproduk.') ['.$nomortransaksi.'] (Tahap 1)';
+	    $saldo['keterangan'] = 'Saldo Bertambah Konfirmasi Penjualan (Pembelian '.$namaproduk.') ['.$nomortransaksi.'] (Tahap 1)';
 	    $saldo->save();
     	return back()->with('success', 'Berhasil Menolak Pemesanan');
 	    
+    }
+    public function pengiriman($id)
+    {
+        $penjualan = ProdukPemesanan::find($id);
+        $penjualan['waktu_pengiriman'] = Carbon::now();
+        $penjualan['status'] = 'Pengiriman';
+        $penjualan->save();
+
+        return back()->with('success', 'Berhasil mengubah Status Ke Pengiriman');
     }
 }
