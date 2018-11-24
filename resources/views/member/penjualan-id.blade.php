@@ -114,6 +114,7 @@
                 <?php 
                   $produk = json_decode($penjualan->produk);
                   $cek = App\Models\Produk::find($produk->id);
+                  $lokasi = App\Models\Lokasi::find($penjualan->id_lokasi);
                 ?>
                 @if(!empty($cek))
                  <a href="{{url('member/produk/id/'.$produk->id)}}"><b>{{$produk->nama_produk}}</b> {{$produk->deskripsi}}</a>
@@ -127,12 +128,16 @@
               <td>{{(!empty($penjualan->nama_paket))? 'Paket '. $penjualan->nama_paket : 'Produk '. $penjualan->nama_produk }}</td>
             </tr>
             <tr>
+              <th>Qty</th>
+              <td>{{$penjualan->qty}}</td>
+            </tr>
+            <tr>
               <th>Harga</th>
               <td>{{$penjualan->harga}}</td>
             </tr>
             <tr>
-              <th>Jumlah</th>
-              <td>{{$penjualan->qty}}</td>
+              <th>Biaya Pengiriman</th>
+              <td>{{$penjualan->biaya_kirim . ' ('. $lokasi->wilayah.'-'.$lokasi->lokasi.')'}}</td>
             </tr>
             <tr>
               <th>Total bayar</th>

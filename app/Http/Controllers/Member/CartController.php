@@ -11,6 +11,7 @@ use App\Models\ProdukPemesanan;
 use App\Models\Paket;
 use App\Models\Saldo;
 use App\Models\StokProduk;
+use App\Models\ProdukPengiriman;
 use Carbon\Carbon;
 use Cart;
 
@@ -24,16 +25,32 @@ class CartController extends Controller
 	{
 		return view('member.cart');
 	}
-    public function tambahproduk($id)
+    public function tambahproduk(Request $request)
     {
-    	$produk = Produk::find($id);
-    	Cart::add($id, $produk->nama_produk, 1, $produk->harga, ['type' => 'Produk', 'id' => $id]);
+        $pengiriman = ProdukPengiriman::where('id',$request->id_pengiriman)->select('id_lokasi', 'tagihan')->first();
+    	$produk = Produk::where('id',$request->id_produk)->select('nama_produk','harga')->first();
+    	$cart = Cart::add($request->id_produk, $produk->nama_produk, $request->qty, $produk->harga, ['type' => 'Produk', 'id' => $request->id_produk, 'lokasi'=> $pengiriman->id_lokasi, 'biaya'=> $pengiriman->tagihan]);
+        // dd($cart);
     	return back()->with('success', 'Berhasil Memasukkan ke Keranjang');
     }
-    public function tambahpaket($id)
+    public function tampilpengiriman($type, $id)
     {
-    	$paket = Paket::find($id);
-    	Cart::add($id, $paket->nama_paket, 1, $paket->harga, ['type' => 'Paket','id' => $id]);
+        if ($type == 'produk') {
+            $pengirimans = ProdukPengiriman::where('id_produk', $id)->join('lokasis', 'produk_pengirimen.id_lokasi','=','lokasis.id')->select('wilayah','lokasi','id_lokasi','produk_pengirimen.id as id_pengiriman')->get();
+        }elseif ($type = 'paket') {
+            $pengirimans = PaketPengiriman::where('id_paket', $id)->join('lokasis', 'paket_pengirimen.id_lokasi','=','lokasis.id')->select('wilayah','lokasi','id_lokasi','produk_pengirimen.id as id_pengiriman')->get();
+        }
+        return $pengirimans;
+    }
+    public function tampiltagihan($id_pengiriman)
+    {
+        $tagihan = ProdukPengiriman::where('id',$id_pengiriman)->select('tagihan')->first()->tagihan;
+        return $tagihan;
+    }
+    public function tambahpaket(Request $request)
+    {
+    	$paket = Paket::find($request->id_produk);
+    	Cart::add($id, $paket->nama_paket, 1, $paket->harga, ['type' => 'Paket','id' => $request->id, 'lokasi'=> $request->lokasi, 'biaya'=> $request->biaya]);
     	return back()->with('success', 'Berhasil Memasukkan ke Keranjang');
     }
     public function remove($id)
@@ -60,6 +77,9 @@ class CartController extends Controller
     	foreach(Cart::content() as $row){
             $type = $row->options->has('type') ? $row->options->type : '';
             $id = $row->options->has('id') ? $row->options->id : '';
+            $lokasi = $row->options->has('lokasi') ? $row->options->lokasi : '';
+            $biayakirim = ProdukPengiriman::find($lokasi);
+
             if ($type== 'Produk') {
                 $produk = Produk::find($id);
 
@@ -70,7 +90,9 @@ class CartController extends Controller
                 $transaksi['produk'] = $produk;
                 $transaksi['harga'] = $produk->harga;
                 $transaksi['qty'] = $row->qty;
-                $transaksi['total_bayar'] = $row->qty*$produk->harga;
+                $transaksi['id_lokasi'] = $lokasi;
+                $transaksi['biaya_kirim'] = $biayakirim->tagihan;
+                $transaksi['total_bayar'] = $row->qty*$produk->harga+$biayakirim->tagihan;
                 $transaksi['waktu_pesan'] = Carbon::now();
                 $transaksi->save();
 
@@ -81,8 +103,8 @@ class CartController extends Controller
                 $saldo = new Saldo;
                 $saldo['id_member'] = Auth::user()->id;
                 $saldo['saldo_awal'] = $saldomember->saldo_akhir;
-                $saldo['kredit'] = $produk->harga;
-                $saldo['saldo_akhir'] = $saldomember->saldo_akhir-$produk->harga;
+                $saldo['kredit'] = $produk->harga+$biayakirim->tagihan;
+                $saldo['saldo_akhir'] = $saldomember->saldo_akhir-$produk->harga-$biayakirim->tagihan;
                 $saldo['keterangan'] = 'Pengurangan Saldo (Pembelian '.$produk->nama_produk.') ['.$nomortransaksi.']';
                 $saldo->save();
 

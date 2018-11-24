@@ -84,6 +84,9 @@
 
                 <p>Ojo bingun lan ojo gupuh, Seng Penting Yakin</p>
 
+                <a href="{{url('member/register')}}" class="btn btn-primary"><h3>Daftar</a>
+                <a href="{{url('member')}}" class="btn btn-primary">Login</h3></a>
+
                
             </div>
         </div>

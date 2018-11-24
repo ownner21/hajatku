@@ -21,7 +21,9 @@ class TransaksiController extends Controller
     	$transaksis = ProdukPemesanan::orderBy('id','DESC')->get();
     	return view('admin.transaksi', compact('transaksis'));
     }
-    public function FunctionName($value='')
+    public function transaksiid($id)
     {
+        $transaksi = ProdukPemesanan::find($id);
+        return view('admin.transaksi-id', compact('transaksi'));
     }
 }

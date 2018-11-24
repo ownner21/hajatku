@@ -17,7 +17,7 @@ class MemberController extends Controller
     }
     public function index()
     {
-    	$produks = Produk::all();
+    	$produks = Produk::where('id_member', '!=', Auth::user()->id)->get();
     	return view('member.member-dasboard', compact('produks'));
     }
 }
