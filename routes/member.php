@@ -46,7 +46,9 @@ Route::put('/paket/pengiriman/update', 'Member\PaketController@updatepengiriman'
 Route::get('/paket/pengiriman/delete/{id}', 'Member\PaketController@hapuspengiriman');
 
 Route::get('/cart', 'Member\CartController@index');
-Route::get('/cart/store/produk/{id}', 'Member\CartController@tambahproduk');
+Route::post('/cart/store', 'Member\CartController@tambahproduk')->name('cart.store');
+Route::get('/cart/pengiriman/{type}/{id}', 'Member\CartController@tampilpengiriman');
+Route::get('/cart/tagihanpengiriman/{id_pengiriman}', 'Member\CartController@tampiltagihan');
 Route::get('/cart/remove/{id}', 'Member\CartController@remove');
 Route::get('/cart/removeall', 'Member\CartController@removeall');
 Route::get('/cart/lunasi', 'Member\CartController@lunasi');

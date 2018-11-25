@@ -24,3 +24,4 @@ Route::put('/topup/lunas/{id}', 'Admin\TopupController@lunas')->name('topup.konf
 Route::put('/topup/gagal/{id}', 'Admin\TopupController@gagal')->name('topup.gagal');
 
 Route::get('/transaksi', 'Admin\TransaksiController@index');
+Route::get('/transaksi/tracking/{id}', 'Admin\TransaksiController@transaksiid');

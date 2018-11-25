@@ -7,9 +7,6 @@
           <div class="panel-heading">Lokasi 
 
           <span style="float: right">
-
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">Tambah</button>
-
           </span>
           </div>
           <div class="panel-body">
@@ -30,6 +27,8 @@
             <thead>
               <tr>
                 <th style="text-align: center">#</th>
+                <th>Nomor Transaksi</th>
+                <th>Member</th>
                 <th>Bank</th>
                 <th>Nominal</th>
                 <th>Status</th>
@@ -39,8 +38,13 @@
             <tbody>
               <?php $n= 1; ?>
               @foreach($topups as $topup)
+              <?php 
+                $nama = App\Models\User::find($topup->id);
+              ?>
               <tr>
                 <td style="text-align: center">{{$n++}}</td>
+                <td>{{ sprintf("%05d", $topup->id)}}</td>
+                <td>{{(!empty($nama))? $nama->nama: 'NN'}}</td>
                 <td>{{$topup->bank}}</td>
                 <td>{{$topup->nominal}}</td>
                 <td>{{$topup->status}}</td>

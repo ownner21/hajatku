@@ -33,6 +33,7 @@
             <thead>
               <tr>
                 <th style="text-align: center">#</th>
+                <th>Nomor Transaksi</th>
                 <th>Bank</th>
                 <th>Nominal</th>
                 <th>Status</th>
@@ -43,6 +44,7 @@
               @foreach($topups as $topup)
               <tr>
                 <td style="text-align: center">{{$n++}}</td>
+                <td>{{ sprintf("%05d", $topup->id)}}</td>
                 <td>{{$topup->bank}}</td>
                 <td>{{$topup->nominal}}</td>
                 <td>{{$topup->status}}</td>
@@ -69,6 +71,7 @@
           <tr> <th>BRI</th> <td>10912983009</td> </tr>
           <tr> <th>Bank Jatim</th> <td>1986709</td> </tr>
         </table>
+        <p><b>Harap Mencantumkan Nomor TOPUP pada deskripsi anda pada saat transfer ke BANK </p>
       </div>
     </div>
   </div>
