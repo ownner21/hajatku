@@ -25,6 +25,7 @@ class CreateProdukPemesanansTable extends Migration
             $table->integer('total_bayar');
             $table->integer('id_lokasi')->nullable();
             $table->integer('biaya_kirim')->nullable();
+            $table->text('alamat');
             $table->timestamp('waktu_pesan')->nullable();
             $table->timestamp('waktu_konfirmasi')->nullable();
             $table->timestamp('waktu_kembali')->nullable();

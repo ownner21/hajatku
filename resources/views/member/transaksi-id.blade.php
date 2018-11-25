@@ -130,6 +130,10 @@
               <th>Total bayar</th>
               <td>{{$transaksi->total_bayar}}</td>
             </tr>
+            <tr>
+              <th>Alamat Pengiriman</th>
+              <td>{{$transaksi->alamat}}</td>
+            </tr>
             <tr> <th>Waktu Pesan</th> <td>{{$transaksi->waktu_pesan}}</td></tr>
             @if(!empty($transaksi->waktu_konfirmasi))<tr> <th>Waktu Konfirmasi Penjual</th> <td>{{$transaksi->waktu_konfirmasi}}</td></tr>@endif
             @if(!empty($transaksi->waktu_pengerjaan))<tr> <th>Waktu Pengerjaan</th> <td>{{$transaksi->waktu_pengerjaan}}</td></tr>@endif

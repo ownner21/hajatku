@@ -29,7 +29,7 @@ class CartController extends Controller
     {
         $pengiriman = ProdukPengiriman::where('id',$request->id_pengiriman)->select('id_lokasi', 'tagihan')->first();
     	$produk = Produk::where('id',$request->id_produk)->select('nama_produk','harga')->first();
-    	$cart = Cart::add($request->id_produk, $produk->nama_produk, $request->qty, $produk->harga, ['type' => 'Produk', 'id' => $request->id_produk, 'lokasi'=> $pengiriman->id_lokasi, 'biaya'=> $pengiriman->tagihan]);
+    	$cart = Cart::add($request->id_produk, $produk->nama_produk, $request->qty, $produk->harga, ['type' => 'Produk', 'id' => $request->id_produk, 'lokasi'=> $pengiriman->id_lokasi, 'biaya'=> $pengiriman->tagihan, 'alamat'=>$request->alamat]);
         // dd($cart);
     	return back()->with('success', 'Berhasil Memasukkan ke Keranjang');
     }
@@ -78,6 +78,7 @@ class CartController extends Controller
             $type = $row->options->has('type') ? $row->options->type : '';
             $id = $row->options->has('id') ? $row->options->id : '';
             $lokasi = $row->options->has('lokasi') ? $row->options->lokasi : '';
+            $alamat = $row->options->has('alamat') ? $row->options->alamat : '';
             $biayakirim = ProdukPengiriman::find($lokasi);
 
             if ($type== 'Produk') {
@@ -91,6 +92,7 @@ class CartController extends Controller
                 $transaksi['harga'] = $produk->harga;
                 $transaksi['qty'] = $row->qty;
                 $transaksi['id_lokasi'] = $lokasi;
+                $transaksi['alamat'] = $alamat;
                 $transaksi['biaya_kirim'] = $biayakirim->tagihan;
                 $transaksi['total_bayar'] = $row->qty*$produk->harga+$biayakirim->tagihan;
                 $transaksi['waktu_pesan'] = Carbon::now();

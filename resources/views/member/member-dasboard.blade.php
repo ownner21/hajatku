@@ -77,7 +77,7 @@
           <div class="row form-group">
             <label for="wilayah" class="col-sm-4 control-label"> Jumlah / Qty</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" name="qty" placeholder="qty" id="minbeli">
+              <input type="number" class="form-control" name="qty" placeholder="qty" id="minbeli">
             </div>
           </div>
           <div class="row form-group">
@@ -89,6 +89,12 @@
           <div class="row form-group">
             <label for="lokasi" class="col-sm-4 control-label">Tagihan</label>
             <div class="col-sm-8" id="tagihan">
+            </div>
+          </div>
+          <div class="row form-group">
+            <label for="lokasi" class="col-sm-4 control-label">Alamat Detail</label>
+            <div class="col-sm-8" id="tagihan">
+              <textarea class="form-control" name="alamat" placeholder="Alamat Detail Pembeli" required></textarea>
             </div>
           </div>
 
