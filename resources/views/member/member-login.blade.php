@@ -14,7 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div  id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -44,7 +44,6 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('member.login') }}">Login</a></li>
-                            <li><a href="{{ route('member.register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -75,7 +74,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Login</div>
+                        <div class="panel-heading"><center>Login</center></div>
 
                         <div class="panel-body">
                             <form class="form-horizontal" method="POST" action="{{ route('member.login') }}">
@@ -124,7 +123,11 @@
                                         <button type="submit" class="btn btn-primary">
                                             Login
                                         </button>
-                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8 col-md-offset-4">
+                                           Belum punya akun? <a href="{{ route('member.register') }}">Register</a>
                                     </div>
                                 </div>
                             </form>
