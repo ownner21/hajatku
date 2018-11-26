@@ -77,6 +77,21 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Daftar</div>
 
+                        @if (session('success'))
+                          <div class="">
+                            <div class="alert alert-success">
+                                <center>{{ session('success') }}</center>
+                            </div>
+                          </div>
+                        @endif
+                        @if (session('gagal'))
+                          <div class="">
+                            <div class="alert alert-danger">
+                                <center>{{ session('gagal') }}</center>
+                            </div>
+                          </div>
+                        @endif
+
                         <div class="panel-body">
                             <form class="form-horizontal" method="POST" action="{{ route('member.register') }}">
                         {{ csrf_field() }}

@@ -77,6 +77,13 @@
                         <div class="panel-heading"><center>Login
                            
                         </center></div>
+                            @if (session('success'))
+                              <div class="">
+                                <div class="alert alert-success">
+                                    <center>{{ session('success') }}</center>
+                                </div>
+                              </div>
+                            @endif
                             @if (session('gagal'))
                               <div class="">
                                 <div class="alert alert-danger">

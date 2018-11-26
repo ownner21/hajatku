@@ -1,26 +1,24 @@
 <?php
-
 namespace App\Mail;
-
+use App\Models\User;
+use Crypt;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class VerifyEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    private $member;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $member)
     {
-        //
+        $this->member = $member;
     }
-
     /**
      * Build the message.
      *
@@ -28,6 +26,12 @@ class VerifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        // generate link
+        $encryptedEmail = Crypt::encrypt($this->member->email);
+        // ex: domain.com/verify?token=xxxx
+        $link = route('signup.verify', ['token' => $encryptedEmail]);
+        return $this->subject('Verify Your Email Address')
+            ->with('link', $link)
+            ->view('email.signup');
     }
 }
