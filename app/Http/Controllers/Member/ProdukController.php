@@ -131,9 +131,10 @@ class ProdukController extends Controller
     }
     public function stokproduk($id_produk)
     {
+        $produk = Produk::where('id',$id_produk)->select('nama_produk')->first();
         $stoks = StokProduk::where('id_produk', $id_produk)->orderBy('id','DESC')->get();
         $stokskarang = StokProduk::where('id_produk', $id_produk)->orderBy('id','DESC')->select('stok_akhir')->first();
-        return view('member.produk-stok', compact('stoks', 'id_produk', 'stokskarang'));
+        return view('member.produk-stok', compact('stoks', 'id_produk', 'stokskarang', 'produk'));
     }
     public function storestok(Request $request)
     {

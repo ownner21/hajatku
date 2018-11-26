@@ -12,7 +12,7 @@
 
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Lokasi 
+          <div class="panel-heading">Stok Produk <b>{{$produk->nama_produk}}</b>
 
           <span style="float: right">
 
