@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Lokasi 
+          <div class="panel-heading">Lokasi
 
           <span style="float: right">
 
@@ -12,19 +12,28 @@
 
           </span>
           </div>
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
           <div class="panel-body">
               @if (session('status'))
                   <div class="alert alert-success">
                       {!! session('status') !!}
                   </div>
               @endif
-              
+
               <div class="row">
                 <div class="col-sm-12 col-md-4">
                    Wilayah ini sebah pilihan
                 </div>
               </div>
-             
+
           </div>
           <table class="table">
             <thead>
@@ -44,9 +53,9 @@
                 <td>{{$lokasi->lokasi}}</td>
                 <td>
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalupdate"
-                     data-id="{{$lokasi->id}}" 
-                     data-wilayah="{{$lokasi->wilayah}}"  
-                     data-lokasi="{{$lokasi->lokasi}}" 
+                     data-id="{{$lokasi->id}}"
+                     data-wilayah="{{$lokasi->wilayah}}"
+                     data-lokasi="{{$lokasi->lokasi}}"
                      >Update</button>
                      <a onclick="event.preventDefault(); document.getElementById('hapus-form{{$lokasi->id}}').submit();" class="btn-sm btn btn-danger"> Hapus </a>
                     <form id="hapus-form{{$lokasi->id}}" action="{{ route('lokasi.hapus', ['id'=> $lokasi->id]) }}" method="POST" style="display: none;">
@@ -121,10 +130,10 @@
     </div>
   </div>
 </div>
-           
 
 
-            
+
+
 @endsection
 @section('script')
 <script type="text/javascript">

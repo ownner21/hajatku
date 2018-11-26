@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Lokasi 
+          <div class="panel-heading">Topup 
 
           <span style="float: right">
           </span>
@@ -18,7 +18,7 @@
               
               <div class="row">
                 <div class="col-sm-12 col-md-4">
-                   Wilayah ini sebah pilihan
+                    Daftar Member Topup
                 </div>
               </div>
              
@@ -31,6 +31,8 @@
                 <th>Member</th>
                 <th>Bank</th>
                 <th>Nominal</th>
+                <th>Pengajuan</th>
+                <th>Respon Admin</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -39,7 +41,7 @@
               <?php $n= 1; ?>
               @foreach($topups as $topup)
               <?php 
-                $nama = App\Models\User::find($topup->id);
+                $nama = App\Models\User::find($topup->id_member);
               ?>
               <tr>
                 <td style="text-align: center">{{$n++}}</td>
@@ -47,6 +49,8 @@
                 <td>{{(!empty($nama))? $nama->nama: 'NN'}}</td>
                 <td>{{$topup->bank}}</td>
                 <td>{{$topup->nominal}}</td>
+                <td>{{$topup->created_at}}</td>
+                <td>{{$topup->updated_at}}</td>
                 <td>{{$topup->status}}</td>
                 <td>
                     @if($topup->status == 'Pengajuan')
@@ -54,8 +58,8 @@
                     <form id="konfirmasi-form{{$topup->id}}" action="{{ route('topup.konfirmasi', ['id'=> $topup->id]) }}" method="POST" style="display: none;">
                         {{ csrf_field() }}{{ method_field('PUT') }}
                     </form>
-                    <a onclick="event.preventDefault(); document.getElementById('konfirmasi-form{{$topup->id}}').submit();" class="btn-sm btn btn-danger"> Gagal </a>
-                    <form id="konfirmasi-form{{$topup->id}}" action="{{ route('topup.gagal', ['id'=> $topup->id]) }}" method="POST" style="display: none;">
+                    <a onclick="event.preventDefault(); document.getElementById('gagal-form{{$topup->id}}').submit();" class="btn-sm btn btn-danger"> Gagal </a>
+                    <form id="gagal-form{{$topup->id}}" action="{{ route('topup.gagal', ['id'=> $topup->id]) }}" method="POST" style="display: none;">
                         {{ csrf_field() }}{{ method_field('PUT') }}
                     </form>
                     @else

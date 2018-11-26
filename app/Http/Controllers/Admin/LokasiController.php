@@ -20,8 +20,16 @@ class LokasiController extends Controller
     	$lokasis = Lokasi::all();
     	return view('admin.lokasi', compact('lokasis'));
     }
+    public function validasi(Request $request)
+    {
+      $this->validate($request, [
+        'wilayah' => 'required|max:100',
+        'lokasi' => 'required|max:100',
+      ]);
+    }
     public function store(Request $request)
     {
+        $this->validasi($request);
         $lokasi = new Lokasi();
         $lokasi->fill($request->all());
         $lokasi->save();
@@ -30,6 +38,7 @@ class LokasiController extends Controller
 
     public function update(Request $request)
     {
+        $this->validasi($request);
         $lokasi = Lokasi::find($request->id);
         $lokasi->fill($request->all());
         $lokasi->save();

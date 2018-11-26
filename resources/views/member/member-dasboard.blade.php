@@ -42,7 +42,8 @@
                      data-namaproduk="{{$produk->nama_produk}}" 
                      data-deskripsi="{{$produk->deskripsi}}" 
                      data-minbeli="{{$produk->min_pemesanan}}" 
-                     >Bseli</button>
+                     data-maxbeli="{{$produk->max_pemesanan}}" 
+                     >Beli</button>
               {{-- <a href="{{url('member/cart/store/produk/'.$produk->id)}}" class="btn btn-primary" role="button">Beli</a> --}}
               <a href="#" class="btn btn-default" role="button">Detail</a></p>
           </div>
@@ -117,6 +118,7 @@ $('#modalupdate').on('show.bs.modal', function (event) {
   var namaproduk = button.data('namaproduk');
   var deskripsi = button.data('deskripsi');
   var minbeli = button.data('minbeli');
+  var maxbeli = button.data('maxbeli');
 
   $.get('{{ url('member/cart/pengiriman/produk')}}/'+id, function(data){
       $('#tagihan').empty();
@@ -133,6 +135,8 @@ $('#modalupdate').on('show.bs.modal', function (event) {
   modal.find('#label-nama-isi').text(namaproduk)
   modal.find('#label-nama-deskripsi').text(deskripsi)
   modal.find('#minbeli').val(minbeli)
+  modal.find('#minbeli').attr("min",minbeli);
+  modal.find('#minbeli').attr("max",maxbeli);
   modal.find('#id_produk').val(id)
 })
 $('#pilihlokasi').on('change', function(e){

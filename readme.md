@@ -17,9 +17,15 @@ Diajukan untuk memenuhi tugas akhir semester Pertama PJJ Ak 2018
 <br>
 <p>Cara membuat akun admin</p>
 
+Masuk CMD pada folder aplikasi hajatku. <br>
+
 ketik "php artisan tinker" <br>
 
-ketik <br>
+ketik :<br>
 
-App\Models\Admin::creat(['email'=>'admin@admin', 'password'=>bcrypt(121212)])
+App\Models\Admin::create(['email'=>'admin@admin.com', 'password'=>bcrypt(121212)]) <br>
+
+Atau <br>
+
+App\Models\Admin::create(['email'=>'admin@admin.com', 'password'=>bcrypt("passwordString")])
 

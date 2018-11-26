@@ -34,6 +34,7 @@ class TopupController extends Controller
     {
         $saldomember = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->select('saldo_akhir')->first();
         $saldos = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->get();
+        $saldomember = (!empty($saldomember))? $saldomember->saldo_akhir: '0';
         return view('member.saldo', compact('saldomember','saldos'));
     }
 }
