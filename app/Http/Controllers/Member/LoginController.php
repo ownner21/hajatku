@@ -40,6 +40,10 @@ class LoginController extends Controller
         // Attempt to log the user in
         if (Auth::guard()->attempt($credential, $credential)){
             // If login succesful, then redirect to their intended location
+            if (Auth::user()->status == "Blok") {
+                Auth::guard()->logout();
+                return redirect('member/login')->with('gagal','Status member anda telah diblock oleh admin ');
+            }
             return redirect()->intended(route('member.home'));
         }
 
