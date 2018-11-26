@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Kategori 
+          <div class="panel-heading">Kategori
 
           <span style="float: right">
 
@@ -18,13 +18,13 @@
                       {!! session('status') !!}
                   </div>
               @endif
-              
+
               <div class="row">
                 <div class="col-sm-12 col-md-4">
                    Kategori ini akan tampil pada menu utama
                 </div>
               </div>
-             
+
           </div>
           <table class="table">
             <thead>
@@ -44,9 +44,9 @@
                 <td>{{$kategori->status}}</td>
                 <td>
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalupdate"
-                     data-id="{{$kategori->id}}" 
-                     data-kategori="{{$kategori->kategori}}"  
-                     data-status="{{$kategori->status}}" 
+                     data-id="{{$kategori->id}}"
+                     data-kategori="{{$kategori->kategori}}"
+                     data-status="{{$kategori->status}}"
                      >Update</button>
                      <a onclick="event.preventDefault(); document.getElementById('hapus-form{{$kategori->id}}').submit();" class="btn-sm btn btn-danger"> Hapus </a>
                     <form id="hapus-form{{$kategori->id}}" action="{{ route('kategori.hapus', ['id'=> $kategori->id]) }}" method="POST" style="display: none;">
@@ -74,7 +74,7 @@
 
           <div class="form-group">
             <label for="kategori" class="control-label">Kategori:</label>
-            <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori">
+            <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori" maxlength="35">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Status:</label>
@@ -109,7 +109,7 @@
           <input type="hidden" name="id" id="id">
           <div class="form-group">
             <label for="recipient-name" class="control-label">Kategori:</label>
-            <input type="text" class="form-control" id="kategori" name="kategori">
+            <input type="text" class="form-control" id="kategori" name="kategori" maxlength="35">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Status:</label>
@@ -129,10 +129,10 @@
     </div>
   </div>
 </div>
-           
 
 
-            
+
+
 @endsection
 @section('script')
 <script type="text/javascript">
