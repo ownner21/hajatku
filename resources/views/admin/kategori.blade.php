@@ -12,6 +12,15 @@
 
           </span>
           </div>
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
           <div class="panel-body">
               @if (session('status'))
                   <div class="alert alert-success">
@@ -74,7 +83,7 @@
 
           <div class="form-group">
             <label for="kategori" class="control-label">Kategori:</label>
-            <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori" maxlength="35">
+            <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Status:</label>
@@ -109,7 +118,7 @@
           <input type="hidden" name="id" id="id">
           <div class="form-group">
             <label for="recipient-name" class="control-label">Kategori:</label>
-            <input type="text" class="form-control" id="kategori" name="kategori" maxlength="35">
+            <input type="text" class="form-control" id="kategori" name="kategori">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Status:</label>
