@@ -20,8 +20,15 @@ class KategoriController extends Controller
     	$kategoris = Kategori::all();
     	return view('admin.kategori', compact('kategoris'));
     }
+    public function validasi(Request $request)
+    {
+      $this->validate($request, [
+        'kategori' => 'required|max:40',
+      ]);
+    }
     public function store(Request $request)
     {
+        $this->validasi($request);
         $kategori = new Kategori();
         $kategori->fill($request->all());
         $kategori->save();
@@ -30,6 +37,7 @@ class KategoriController extends Controller
 
     public function update(Request $request)
     {
+        $this->validasi($request);
         $kategori = Kategori::find($request->id);
         $kategori->fill($request->all());
         $kategori->save();
