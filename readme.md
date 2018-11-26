@@ -23,9 +23,9 @@ ketik "php artisan tinker" <br>
 
 ketik :<br>
 
-App\Models\Admin::create(['email'=>'admin@admin', 'password'=>bcrypt(121212)]) <br>
+App\Models\Admin::create(['email'=>'admin@admin.com', 'password'=>bcrypt(121212)]) <br>
 
 Atau <br>
 
-App\Models\Admin::create(['email'=>'admin@admin', 'password'=>bcrypt("passwordString")])
+App\Models\Admin::create(['email'=>'admin@admin.com', 'password'=>bcrypt("passwordString")])
 
