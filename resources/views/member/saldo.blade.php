@@ -18,7 +18,7 @@
               
               <div class="row">
                 <div class="col-sm-12">
-                  <b>Saldo Anda Sekarang {{$saldomember->saldo_akhir}} </b> <br>
+                  <b>Saldo Anda Sekarang {{$saldomember}} </b> <br>
                    Riwayat Pemasukan Dan Pengeluaran Saldo Anda
                 </div>
               </div>
