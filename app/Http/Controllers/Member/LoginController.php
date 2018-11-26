@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6|regex:/^[\pL\s\-]+$/u'
         ]);
 
         $credential = [
@@ -62,7 +62,7 @@ class LoginController extends Controller
         Validator::make($data->all(), [
             'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed|regex:/^[\pL\s\-]+$/u',
         ])->validate();
 
         $member = new User();
