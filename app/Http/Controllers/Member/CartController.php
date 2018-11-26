@@ -12,8 +12,9 @@ use App\Models\Paket;
 use App\Models\Saldo;
 use App\Models\StokProduk;
 use App\Models\ProdukPengiriman;
+use App\Models\Cart;
 use Carbon\Carbon;
-use Cart;
+use DB;
 
 class CartController extends Controller
 {
@@ -23,14 +24,36 @@ class CartController extends Controller
     }
 	public function index()
 	{
-		return view('member.cart');
+        $carts = Cart::where('id_pemesan', Auth::user()->id)
+                ->join('produks','carts.id_produk','=','produks.id')
+                ->join('produk_pengirimen','carts.id_pengiriman','=','produk_pengirimen.id')
+                ->join('lokasis','produk_pengirimen.id_lokasi','=','lokasis.id')
+                ->select('produks.nama_produk','produks.harga', 'carts.*','produk_pengirimen.tagihan', 'lokasis.wilayah', 'lokasis.lokasi')
+                ->get();
+		return view('member.cart', compact('carts', 'harga'));
 	}
     public function tambahproduk(Request $request)
     {
-        $pengiriman = ProdukPengiriman::where('id',$request->id_pengiriman)->select('id_lokasi', 'tagihan')->first();
-    	$produk = Produk::where('id',$request->id_produk)->select('nama_produk','harga')->first();
-    	$cart = Cart::add($request->id_produk, $produk->nama_produk, $request->qty, $produk->harga, ['type' => 'Produk', 'id' => $request->id_produk, 'lokasi'=> $pengiriman->id_lokasi, 'biaya'=> $pengiriman->tagihan, 'alamat'=>$request->alamat]);
-        // dd($cart);
+        $find = Cart::where(['id_pemesan'=> Auth::user()->id, 'id_produk'=>$request->id_produk])->first();
+        if (!empty($find)) {
+            $produk = Produk::where('id',$request->id_produk)->select('max_pemesanan')->first();
+            if ($find->qty+$request->qty <= $produk->max_pemesanan) {
+                $find['qty'] = $find->qty+$request->qty;
+                $find['alamat'] = $request->alamat;
+                $find->update();
+            }else{
+                return back()->with('gagal', 'Jumlah Maksimum pembelian produk melebihi batas yang ditentukan penjual');
+            }
+        }else{
+            $cart = new Cart;
+            $cart['id_pemesan'] = Auth::user()->id;
+            $cart['id_produk'] = $request->id_produk;
+            $cart['qty'] = $request->qty;
+            $cart['id_pengiriman'] = $request->id_pengiriman;
+            $cart['alamat'] = $request->alamat;
+            $cart->save();
+        }
+
     	return back()->with('success', 'Berhasil Memasukkan ke Keranjang');
     }
     public function tampilpengiriman($type, $id)
@@ -55,34 +78,39 @@ class CartController extends Controller
     }
     public function remove($id)
     {
-    	Cart::remove($id);
+    	Cart::find($id)->delete();
     	return back()->with('success', 'Berhasil Menghapus dari Keranjang');
     }
     public function removeall()
     {
-    	Cart::destroy();
+    	Cart::where('id_pemesan', Auth::user()->id)->delete();
     	return back()->with('success', 'Berhasil Menghapus Semua Isi Keranjang');
     }
     public function lunasi()
     {
         $saldomember = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->select('saldo_akhir')->first();
+
+        $carts = Cart::where('id_pemesan', Auth::user()->id)
+                ->join('produks','carts.id_produk','=','produks.id')
+                ->join('produk_pengirimen','carts.id_pengiriman','=','produk_pengirimen.id')
+                ->join('lokasis','produk_pengirimen.id_lokasi','=','lokasis.id')
+                ->select('produks.nama_produk','produks.harga', 'carts.*','produk_pengirimen.tagihan', 'lokasis.wilayah', 'lokasis.lokasi')
+                ->get();
+        $total = 0;
+        foreach ($carts as $cart) {
+            $total += $cart->harga*$cart->qty+$cart->tagihan;
+        }
         //cek saldo mencukupi 
         if (empty($saldomember)) {
            return back()->with('gagal', 'Anda Belum Melakukan TopUp');
-        } elseif ($saldomember->saldo_akhir < str_replace(",","",Cart::subtotal())) {
+        } elseif ($saldomember->saldo_akhir < $total) {
            return back()->with('gagal', 'Saldo Anda Tidak Mencukupi');
         }
 
         //pengurangan saldo dengan perulangan
-    	foreach(Cart::content() as $row){
-            $type = $row->options->has('type') ? $row->options->type : '';
-            $id = $row->options->has('id') ? $row->options->id : '';
-            $lokasi = $row->options->has('lokasi') ? $row->options->lokasi : '';
-            $alamat = $row->options->has('alamat') ? $row->options->alamat : '';
-            $biayakirim = ProdukPengiriman::find($lokasi);
-
-            if ($type== 'Produk') {
-                $produk = Produk::find($id);
+    	foreach($carts as $cart){
+            if (!empty($cart->id_produk)) {
+                $produk = Produk::find($cart->id_produk);
 
                 $transaksi = new ProdukPemesanan;
                 $transaksi['id_member'] = Auth::user()->id;
@@ -90,11 +118,11 @@ class CartController extends Controller
                 $transaksi['nama_produk'] = $produk->nama_produk;
                 $transaksi['produk'] = $produk;
                 $transaksi['harga'] = $produk->harga;
-                $transaksi['qty'] = $row->qty;
-                $transaksi['id_lokasi'] = $lokasi;
-                $transaksi['alamat'] = $alamat;
-                $transaksi['biaya_kirim'] = $biayakirim->tagihan;
-                $transaksi['total_bayar'] = $row->qty*$produk->harga+$biayakirim->tagihan;
+                $transaksi['qty'] = $cart->qty;
+                $transaksi['id_lokasi'] = $cart->id_pengiriman;
+                $transaksi['alamat'] = $cart->alamat;
+                $transaksi['biaya_kirim'] = $cart->tagihan;
+                $transaksi['total_bayar'] = $cart->harga*$cart->qty+$cart->tagihan;
                 $transaksi['waktu_pesan'] = Carbon::now();
                 $transaksi->save();
 
@@ -102,32 +130,33 @@ class CartController extends Controller
                 $nomortransaksi = sprintf("%05d", $transaksi->id);
 
                 //pengurangan saldo
+                $saldomember = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->select('saldo_akhir')->first();
                 $saldo = new Saldo;
                 $saldo['id_member'] = Auth::user()->id;
                 $saldo['saldo_awal'] = $saldomember->saldo_akhir;
-                $saldo['kredit'] = $produk->harga+$biayakirim->tagihan;
-                $saldo['saldo_akhir'] = $saldomember->saldo_akhir-$produk->harga-$biayakirim->tagihan;
-                $saldo['keterangan'] = 'Pengurangan Saldo (Pembelian '.$produk->nama_produk.') ['.$nomortransaksi.']';
+                $saldo['kredit'] = $cart->harga*$cart->qty+$cart->tagihan;
+                $saldo['saldo_akhir'] = $saldomember->saldo_akhir-($cart->harga*$cart->qty+$cart->tagihan);
+                $saldo['keterangan'] = 'Pengurangan Saldo (Pembelian '.$cart->nama_produk.') ['.$nomortransaksi.']';
                 $saldo->save();
 
-                $stokawal = StokProduk::where('id_produk', $id)->orderBy('id', 'DESC')->select('stok_akhir')->first();
+                $stokawal = StokProduk::where('id_produk', $cart->id_produk)->orderBy('id', 'DESC')->select('stok_akhir')->first();
                 $stokawal = (!empty($stokawal))? $stokawal->stok_akhir : 0;
                 
                 //pengurangan stok produk
                 $stok = new StokProduk;
-                $stok['id_produk'] = $id;
+                $stok['id_produk'] = $cart->id_produk;
                 $stok['stok_awal'] = $stokawal;
-                $stok['kredit'] = $row->qty;
-                $stok['stok_akhir'] = $stokawal-$row->qty;
+                $stok['kredit'] = $cart->qty;
+                $stok['stok_akhir'] = $stokawal-$cart->qty;
                 $stok['keterangan'] = 'Pengurangan Stok ['.$nomortransaksi.']';
                 $stok->save();
 
-            }elseif ($type == 'Paket') {
+            }elseif (!empty($cart->id_paket)) {
                 dd('Jenis Paket');
             }
         }
         if ($saldo) {
-            Cart::destroy();
+            Cart::where('id_pemesan', Auth::user()->id)->delete();
             return redirect('member')->with('success', 'Berhasil Melakukan Transaksi');
         }
     }

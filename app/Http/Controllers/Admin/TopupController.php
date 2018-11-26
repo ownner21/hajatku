@@ -18,7 +18,7 @@ class TopupController extends Controller
     public function index()
     {
     	$saldos = Saldo::all();
-    	$topups = Topup::all();
+    	$topups = Topup::orderBy('id', 'DESC')->get();
     	return view('admin.topup', compact('saldos', 'topups'));
     }
     public function lunas($id)

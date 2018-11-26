@@ -79,6 +79,7 @@
                       <a href="{{url('admin/lokasi')}}" class="list-group-item">Lokasi</a>
                       <a href="{{url('admin/member')}}" class="list-group-item">Member</a>
                       <a href="{{url('admin/topup')}}" class="list-group-item">Topup</a>
+                      <a href="{{url('admin/bank')}}" class="list-group-item">Bank</a>
                       <a href="{{url('admin/transaksi')}}" class="list-group-item">Transaksi</a>
                     </div>
                 </div>

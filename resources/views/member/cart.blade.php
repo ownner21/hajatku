@@ -35,43 +35,34 @@
           	</thead>
           	<tbody>
           		<?php $n= 1;
-                    $biayakirim = '';
+                    $total  = 0;
               ?>
-          		@foreach(Cart::content() as $row)
+          		@foreach($carts as $cart)
+              <tr>
+                <?php
+                  $total += $cart->harga*$cart->qty+$cart->tagihan;
+                ?>
+                <td style="text-align: center;">{{$n++}}</td>
+                <td>{{$cart->nama_produk}}</td>
+                <td>{{$cart->qty}}</td>
+                <td>{{$cart->harga}}</td>
+                <td>{{$cart->wilayah.' - '.$cart->lokasi}}</td>
+                <td>{{$cart->tagihan}}</td>
+                
+                <td style="text-align: right;">{{number_format($cart->harga*$cart->qty+$cart->tagihan,0,",",".")}}</td>
+                  <td><a href="{{url('member/cart/remove/'.$cart->id)}}" class="btn btn-danger btn-sm">Hapus</a></td>
+              </tr>
+              
+              @endforeach
 
-              <?php
+              
+              
 
-                $type = $row->options->has('type') ? $row->options->type : '';
-                $id = $row->options->has('id') ? $row->options->id : '';
-                $lokasi = $row->options->has('lokasi') ? $row->options->lokasi : '';
-                $biaya = $row->options->has('biaya') ? $row->options->biaya : '';
-
-                $lokasi = App\Models\Lokasi::find($lokasi);
-                $biayakirim .= $biaya.' , ';
-              ?>
-		       
-          		<tr>
-          			<td style="text-align: center;">{{$n++}}</td>
-          			<td>{{$row->name}}</td>
-                <td>{{$row->qty}}</td>
-                <td>{{number_format($row->price,0,",",".")}}</td>
-                <td>{{(!empty($lokasi))? $lokasi->wilayah. ' - '. $lokasi->lokasi: 'Lokasi Hilang'}}</td>
-                <td>{{$biaya}}</td>
-          			<td style="text-align: right;">{{number_format($row->price*$row->qty+$biaya,0,",",".")}}</td>
-	                <td><a href="{{url('member/cart/remove/'.$row->rowId)}}" class="btn btn-danger btn-sm">Hapus</a></td>
-          		</tr>
-          		
-    			    @endforeach
-
-              <?php
-                $biayakirim = array_sum(explode (", ",$biayakirim));
-              ?>
-
-            @if(Cart::count()!=0)
+            @if(count($carts)!=0)
   			    <tr>
   			    	<td colspan="5"></td>
   			    	<td>Jumlah Tagihan</td>
-  			    	<td style="text-align: right;"><b>{{number_format(str_replace(",","",Cart::subtotal())+$biayakirim,0,",",".")}}</b></td>
+  			    	<td style="text-align: right;"><b>{{number_format(str_replace(",","",$total),0,",",".")}}</b></td>
   	                <td><a href="{{url('member/cart/removeall')}}" class="btn btn-danger btn-sm">Reset</a></td>
   			    </tr>
             @else
@@ -82,7 +73,7 @@
           	</tbody>
           </table>
           <br>
-          @if(Cart::count()!=0)
+          @if(count($carts)!=0)
           <div class="panel-body" style="background-color: #0001">
           	<div class="row">
           		<div class="col-sm-8">

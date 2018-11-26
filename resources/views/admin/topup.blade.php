@@ -34,7 +34,6 @@
                 <th>Pengajuan</th>
                 <th>Respon Admin</th>
                 <th>Status</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -51,7 +50,6 @@
                 <td>{{$topup->nominal}}</td>
                 <td>{{$topup->created_at}}</td>
                 <td>{{$topup->updated_at}}</td>
-                <td>{{$topup->status}}</td>
                 <td>
                     @if($topup->status == 'Pengajuan')
                      <a onclick="event.preventDefault(); document.getElementById('konfirmasi-form{{$topup->id}}').submit();" class="btn-sm btn btn-success"> Konfirmasi </a>
@@ -63,7 +61,7 @@
                         {{ csrf_field() }}{{ method_field('PUT') }}
                     </form>
                     @else
-                    -
+                    {{$topup->status}}
                     @endif
                 </td>
               </tr>

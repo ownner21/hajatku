@@ -37,6 +37,7 @@
                 <th>Bank</th>
                 <th>Nominal</th>
                 <th>Status</th>
+                <th>Waktu</th>
               </tr>
             </thead>
             <tbody>
@@ -48,6 +49,7 @@
                 <td>{{$topup->bank}}</td>
                 <td>{{$topup->nominal}}</td>
                 <td>{{$topup->status}}</td>
+                <td>{{$topup->updated_at}}</td>
               </tr>
               @endforeach
             </tbody>
@@ -65,11 +67,9 @@
       <div class="modal-body">
         <p>Berikut nomor rekening sesuai dengna nama bank. silahkan mentansfer sesuai dengan Bank pilihan</p>
         <table class="table">
-          <tr> <th>Mandiri</th> <td>1892710209</td> </tr>
-          <tr> <th>BCA</th> <td>164510209</td> </tr>
-          <tr> <th>BNI</th> <td>1423710209</td> </tr>
-          <tr> <th>BRI</th> <td>10912983009</td> </tr>
-          <tr> <th>Bank Jatim</th> <td>1986709</td> </tr>
+          @foreach($banks as $bank)
+          <tr> <th>{{$bank->bank}}</th> <td>{{$bank->no_rek}}</td> </tr>
+          @endforeach
         </table>
         <p><b>Harap Mencantumkan Nomor TOPUP pada deskripsi anda pada saat transfer ke BANK </p>
       </div>
@@ -92,11 +92,9 @@
             <label for="wilayah" class="control-label">Bank:</label>
              <select class="form-control" name="bank" required>
               <option selected disabled> Pilih Bank</option>
-              <option class="Mandiri">Mandiri</option>
-              <option class="BCA">BCA</option>
-              <option class="BNI">BNI</option>
-              <option class="BRI">BRI</option>
-              <option class="Bank Jatim">Bank Jatim</option>
+              @foreach($banks as $bank)
+              <option value="{{$bank->bank.' - '.$bank->no_rek}}">{{$bank->bank}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group">
@@ -106,6 +104,7 @@
               <option value="50000">50.000</option>
               <option value="100000">100.000</option>
               <option value="200000">200.000</option>
+              <option value="500000">500.000</option>
             </select>
           </div>
       </div>

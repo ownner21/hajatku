@@ -63,7 +63,9 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{{url('member/cart')}}">Cart <span class="badge"> {{Cart::count()}}</span></a></li>
+
+                            {{-- <li><a href="{{url('member/topup')}}">Saldo <span class="badge"></span></a></li> --}}
+                            <li><a href="{{url('member/cart')}}">Cart</a></li>
                         @endif
                     </ul>
                 </div>

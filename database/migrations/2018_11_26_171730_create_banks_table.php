@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopupsTable extends Migration
+class CreateBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTopupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('topups', function (Blueprint $table) {
+        Schema::create('banks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_member');
-            $table->integer('bank');
-            $table->integer('nominal');
-            $table->enum('status', ['Pengajuan', 'Lunas', 'Gagal'])->default('Pengajuan');
+            $table->string('bank');
+            $table->integer('no_rek');
+            $table->enum('status',['Tampil', 'Sembunyi'])->default('Sembunyi');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateTopupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topups');
+        Schema::dropIfExists('banks');
     }
 }

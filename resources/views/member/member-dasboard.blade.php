@@ -9,6 +9,13 @@
         </div>
       </div>
     @endif
+    @if (session('gagal'))
+      <div class="col-sm-12">
+        <div class="alert alert-danger">
+            {{ session('gagal') }}
+        </div>
+      </div>
+    @endif
     <div class="col-sm-12">
        <div class="panel panel-default">
           <div class="panel-heading">Dashboard</div>
@@ -119,7 +126,7 @@ $('#modalupdate').on('show.bs.modal', function (event) {
   var deskripsi = button.data('deskripsi');
   var minbeli = button.data('minbeli');
   var maxbeli = button.data('maxbeli');
-
+  console.log(id);
   $.get('{{ url('member/cart/pengiriman/produk')}}/'+id, function(data){
       $('#tagihan').empty();
       $('#pilihlokasi').empty();

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Saldo;
 use App\Models\Topup;
+use App\Models\Bank;
 
 class TopupController extends Controller
 {
@@ -18,9 +19,10 @@ class TopupController extends Controller
     public function index()
     {
     	$saldomember = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->select('saldo_akhir')->first();
-    	$topups = Topup::where('id_member', Auth::user()->id)->get();
+    	$topups = Topup::where('id_member', Auth::user()->id)->orderBy('updated_at', 'DESC')->get();
     	$saldo = (!empty($saldomember))? $saldomember->saldo_akhir: '0';
-    	return view('member.topup', compact('saldo', 'topups'));
+        $banks = Bank::where('status', 'Tampil')->get();
+    	return view('member.topup', compact('saldo', 'topups', 'banks'));
     }
     public function store(Request $request)
     {
@@ -28,7 +30,7 @@ class TopupController extends Controller
         $topup->fill($request->all());
         $topup['id_member']= Auth::user()->id;
         $topup->save();
-        return back()->with('success', 'Berhasil Melakukan Topup silahkan melunasi pada nomor Rekening 812918201289');
+        return back()->with('success', 'Berhasil Melakukan Topup silahkan melunasi pada Rekening <b>'.$topup->bank. '</b>');
     }
     public function laporan()
     {
