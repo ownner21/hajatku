@@ -62,10 +62,8 @@ class LoginController extends Controller
         Validator::make($data->all(), [
             'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed|regex:/^[\pL\s\-]+$/u',
+            'password' => 'required|string|min:6|confirmed|alpha_num',
         ])->validate();
-
-        dd($request);
 
         $member = new User();
         $member->fill($data->all());
