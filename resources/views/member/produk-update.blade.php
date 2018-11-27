@@ -41,17 +41,17 @@
                   <div class="form-group row">
                     <label for="min_pemesanan" class="col-md-3 control-label">Pemesanan</label>
                     <div class="col-md-4">
-                    <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" value="{{$produk->min_pemesanan}}">
+                    <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" min="1" value="{{$produk->min_pemesanan}}">
                     </div>
                     <div class="col-md-4">
-                    <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" value="{{$produk->max_pemesanan}}">
+                    <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" min="1" value="{{$produk->max_pemesanan}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="harga" class="col-md-3 control-label">Harga Produk</label>
                     <div class="col-md-8">
-                    <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{$produk->harga}}">
+                    <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{$produk->harga}}" min="0">
                     </div>
                   </div>
                   <div class="form-group row">

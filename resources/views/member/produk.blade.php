@@ -129,7 +129,7 @@
           <div class="form-group row">
             <label for="stokawal" class="col-md-3 control-label">Stok Awal</label>
             <div class="col-md-8">
-            <input type="text" class="form-control" name="stokawal" placeholder="Stok Awal" value="{{old('stokawal')}}" required>
+            <input type="number" min="1" class="form-control" name="stokawal" placeholder="Stok Awal" value="{{old('stokawal')}}" required>
             </div>
           </div>
 

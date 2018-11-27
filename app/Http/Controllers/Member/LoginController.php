@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required|min:6|regex:/^[\pL\s\-]+$/u'
+            'password' => 'required|min:6'
         ]);
 
         $credential = [
@@ -64,6 +64,8 @@ class LoginController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed|regex:/^[\pL\s\-]+$/u',
         ])->validate();
+
+        dd($request);
 
         $member = new User();
         $member->fill($data->all());

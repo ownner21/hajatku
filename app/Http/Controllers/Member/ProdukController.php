@@ -118,16 +118,16 @@ class ProdukController extends Controller
     	ProdukPengiriman::find($id)->delete();
     	return back()->with('success', 'Berhasil Hapus Lokasi');
     }
-    public function hapus($id_produk)
+    public function delete($id_produk)
     {
-    	Produk::where('id_produk', $id_produk)->delete();
+    	Produk::where('id', $id_produk)->delete();
     	ProdukPengiriman::where('id_produk', $id_produk)->delete();
     	$gambars = ProdukGambar::where('id_produk', $id_produk)->get();
     	foreach ($gambars as $gambar) {
 	        File::delete('images/album/'.$gambar->gambar);
+            $gambar->delete();
     	}
-    	$gambars->delete();
-    	return view('member/produk')->with('success', 'Berhasil Hapus Produk');
+    	return back()->with('success', 'Berhasil Hapus Produk');
     }
     public function stokproduk($id_produk)
     {

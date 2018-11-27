@@ -35,7 +35,7 @@
         $plokasi = App\Models\ProdukPengiriman::where('id_produk', $produk->id)->first();
         $pstok = App\Models\StokProduk::where('id_produk', $produk->id)->orderBy('id','DESC')->first();
       ?>
-      @if(!empty($pgambar) && !empty($pstok) && !empty($plokasi))
+      @if(!empty($pgambar) && !empty($pstok) && !empty($plokasi) && $pstok->stok_akhir!=0)
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail" style="background-color:white">
           <img src="{{asset('images/produk/'.$pgambar->gambar)}}">

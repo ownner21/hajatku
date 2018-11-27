@@ -34,7 +34,7 @@ class CartController extends Controller
 	}
     public function tambahproduk(Request $request)
     {
-        $find = Cart::where(['id_pemesan'=> Auth::user()->id, 'id_produk'=>$request->id_produk])->first();
+        $find = Cart::where(['id_pemesan'=> Auth::user()->id, 'id_produk'=>$request->id_produk, 'id_pengiriman'=>$request->id_pengiriman])->first();
         if (!empty($find)) {
             $produk = Produk::where('id',$request->id_produk)->select('max_pemesanan')->first();
             if ($find->qty+$request->qty <= $produk->max_pemesanan) {
