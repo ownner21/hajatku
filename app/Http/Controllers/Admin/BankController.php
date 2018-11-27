@@ -24,7 +24,7 @@ class BankController extends Controller
     {
       $this->validate($request, [
         'bank' => 'required|max:40',
-        'no_rek' => 'bail|required|min:8|max:18|regex:/^[0-9]*$/u',
+        'no_rek' => 'bail|required|min:8|max:17|regex:/^[0-9]*$/u',
       ]);
     }
     public function store(Request $request)
