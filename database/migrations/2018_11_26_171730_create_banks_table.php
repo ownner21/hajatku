@@ -16,7 +16,7 @@ class CreateBanksTable extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('bank');
-            $table->integer('no_rek');
+            $table->string('no_rek',17);
             $table->enum('status',['Tampil', 'Sembunyi'])->default('Sembunyi');
             $table->timestamps();
         });

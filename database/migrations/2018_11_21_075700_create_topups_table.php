@@ -16,7 +16,7 @@ class CreateTopupsTable extends Migration
         Schema::create('topups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_member');
-            $table->integer('bank');
+            $table->string('bank',50);
             $table->integer('nominal');
             $table->enum('status', ['Pengajuan', 'Lunas', 'Gagal'])->default('Pengajuan');
             $table->timestamps();
