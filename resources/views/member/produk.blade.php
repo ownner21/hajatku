@@ -21,8 +21,7 @@
               
               <div class="row">
                 <div class="col-sm-12 col-md-4">
-                  <b>Saldo Anda Sekarang  </b> <br>
-                   Riwayat Top Anda
+                  Total Produk Anda Sekarang  <b>{{count($produks)}}</b>
                 </div>
               </div>
              
@@ -104,7 +103,7 @@
           <div class="form-group row">
             <label for="harga" class="col-md-3 control-label">Harga Produk</label>
             <div class="col-md-8">
-            <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{old('harga')}}" required>
+            <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{old('harga')}}" min="0" required>
             </div>
           </div>
           <div class="form-group row">

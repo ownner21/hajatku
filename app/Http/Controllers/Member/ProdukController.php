@@ -101,10 +101,21 @@ class ProdukController extends Controller
 
     public function storepengiriman(Request $request)
     {
-    	$pengiriman = new ProdukPengiriman;
-        $pengiriman->fill($request->all());
-        $pengiriman->save();
-        return back()->with('success',' Berhasil Menambah Lokasi Pengiriman');
+        $this->validate($request, [
+            'id_lokasi' => 'required',
+        ]);
+        $find = ProdukPengiriman::where(['id_produk'=>$request->id_produk,'id_lokasi'=>$request->id_lokasi])->first();
+        if (!empty($find)) {
+            $pengiriman = ProdukPengiriman::find($find->id);
+            $pengiriman->fill($request->all());
+            $pengiriman->update();
+            return back()->with('success',' Berhasil Mengubah Tagihan Pengiriman');
+        }else{
+            $pengiriman = new ProdukPengiriman;
+            $pengiriman->fill($request->all());
+            $pengiriman->save();
+            return back()->with('success',' Berhasil Menambah Lokasi Pengiriman');
+        }
     }
     public function updatepengiriman(Request $request)
     {

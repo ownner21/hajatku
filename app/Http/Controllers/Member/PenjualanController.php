@@ -71,11 +71,13 @@ class PenjualanController extends Controller
         $saldomasuk = $penjualan->total_bayar/2;
         $namaproduk = (!empty($penjualan->nama_produk))? $penjualan->nama_produk : $penjualan->nama_paket;
 
+        $saldomember = (!empty($saldomember->saldo_akhir))? $saldomember->saldo_akhir : 0;
+        
     	$saldo = new Saldo;
 	    $saldo['id_member'] = $penjualan->id_penjual;
-	    $saldo['saldo_awal'] = $saldomember->saldo_akhir;
+	    $saldo['saldo_awal'] = $saldomember;
 	    $saldo['debit'] = $saldomasuk;
-	    $saldo['saldo_akhir'] = $saldomember->saldo_akhir+$saldomasuk;
+	    $saldo['saldo_akhir'] = $saldomember+$saldomasuk;
 	    $saldo['keterangan'] = 'Saldo Bertambah Konfirmasi Penjualan (Pembelian '.$namaproduk.') ['.$nomortransaksi.'] (Tahap 1)';
 	    $saldo->save();
     	return back()->with('success', 'Berhasil Menolak Pemesanan');

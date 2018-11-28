@@ -42,7 +42,7 @@ class CartController extends Controller
                 $find['alamat'] = $request->alamat;
                 $find->update();
             }else{
-                return back()->with('gagal', 'Jumlah Maksimum pembelian produk melebihi batas yang ditentukan penjual');
+                return back()->with('gagal', 'Jumlah Maksimum pembelian produk melebihi batas yang ditentukan penjual, <b>Periksa Cart Anda</b>');
             }
         }else{
             $cart = new Cart;
@@ -88,6 +88,8 @@ class CartController extends Controller
     }
     public function lunasi()
     {
+        $berhasil = '';
+        $gagal = '';
         $saldomember = Saldo::where(['id_member'=> Auth::user()->id])->orderBy('id', 'DESC')->select('saldo_akhir')->first();
 
         $carts = Cart::where('id_pemesan', Auth::user()->id)
@@ -111,7 +113,10 @@ class CartController extends Controller
     	foreach($carts as $cart){
             if (!empty($cart->id_produk)) {
                 $produk = Produk::find($cart->id_produk);
+                $stokawal = StokProduk::where('id_produk', $cart->id_produk)->orderBy('id', 'DESC')->select('stok_akhir')->first();
 
+                if ($stokawal->stok_akhir >= $cart->qty) {
+                    
                 $transaksi = new ProdukPemesanan;
                 $transaksi['id_member'] = Auth::user()->id;
                 $transaksi['id_penjual'] = $produk->id_member;
@@ -139,7 +144,6 @@ class CartController extends Controller
                 $saldo['keterangan'] = 'Pengurangan Saldo (Pembelian '.$cart->nama_produk.') ['.$nomortransaksi.']';
                 $saldo->save();
 
-                $stokawal = StokProduk::where('id_produk', $cart->id_produk)->orderBy('id', 'DESC')->select('stok_akhir')->first();
                 $stokawal = (!empty($stokawal))? $stokawal->stok_akhir : 0;
                 
                 //pengurangan stok produk
@@ -151,13 +155,18 @@ class CartController extends Controller
                 $stok['keterangan'] = 'Pengurangan Stok ['.$nomortransaksi.']';
                 $stok->save();
 
+                Cart::where('id_produk', $cart->id_produk)->delete();
+
+                $berhasil .= 'produk <b>'. $produk->nama_produk.'</b> Berhasil Dilunasi <br>';
+                }else{
+                    $gagal .= 'produk <b>'. $produk->nama_produk.'</b> gagal melakukan pelunasan, Anda melewatkan moment kesempatan karena stok habis oleh pembeli lain. <br>';
+                }
             }elseif (!empty($cart->id_paket)) {
                 dd('Jenis Paket');
             }
         }
         if ($saldo) {
-            Cart::where('id_pemesan', Auth::user()->id)->delete();
-            return redirect('member')->with('success', 'Berhasil Melakukan Transaksi');
+            return redirect('member')->with('success', $berhasil)->with('gagal', $gagal);
         }
     }
 }

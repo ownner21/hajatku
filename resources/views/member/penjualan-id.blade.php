@@ -137,7 +137,7 @@
             </tr>
             <tr>
               <th>Biaya Pengiriman</th>
-              <td>{{$penjualan->biaya_kirim . ' ('. $lokasi->wilayah.'-'.$lokasi->lokasi.')'}}</td>
+              <td>{{(!empty($penjualan->biaya_kirim))?$penjualan->biaya_kirim: 'NN' }}{{' ('. $lokasi->wilayah.'-'.$lokasi->lokasi.')'}}</td>
             </tr>
             <tr>
               <th>Total bayar</th>
