@@ -16,7 +16,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top" style="background-color: gold">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: rgb(20, 20, 60)">
             <div class="container">
                 <div class="navbar-header">
 
@@ -29,11 +29,11 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand">
+                       HAJATKU
                     </a>
+                    <input style="margin-top: 10px; margin-left: 100px; width: 300px;" placeholder="Cari">
                 </div>
-
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
@@ -68,13 +68,29 @@
                     </ul>
                 </div>
             </div>
+            <div class="container"  style="margin-left: 195px;">
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-left" style="margin-left: -110px;">
+                        <!-- Authentication Links -->
+                            <li><a href="{{url('member')}}">Dasboard</a></li>
+                            <li><a href="{{url('member/produk')}}">Produk</a></li>
+                            <li><a href="{{url('member/paket')}}" >Paket</a></li>
+                            <li><a href="{{url('member/transaksi')}}">Transaksi</a></li>
+                            <li><a href="{{url('member/penjualan')}}">Penjualan</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="list-group">
                       <a href="{{url('member')}}" class="list-group-item">Dasboard</a>
-                      <a href="{{url('member/topup')}}" class="list-group-item">Topup</a>
                       <a href="{{url('member/produk')}}" class="list-group-item">Produk</a>
                       <a href="{{url('member/paket')}}" class="list-group-item">Paket</a>
                       <a href="{{url('member/transaksi')}}" class="list-group-item">Transaksi</a>

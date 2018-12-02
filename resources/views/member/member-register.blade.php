@@ -74,18 +74,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Daftar</div>
+                        <div class="panel-heading"><center><h3>Daftar akun baru sekarang</h3></center></div>
 
                         <div class="panel-body">
                             <form class="form-horizontal" method="POST" action="{{ route('member.register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('nama') ? ' has-error' : '' }}">
-                            <label for="nama" class="col-md-4 control-label">Nama</label>
-
-                            <div class="col-md-6">
-                                <input id="nama" type="text" class="form-control" name="nama" value="{{ old('nama') }}" required autofocus>
+                            <div class="col-md-13">
+                                <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama" value="{{ old('nama') }}" required autofocus>
 
                                 @if ($errors->has('nama'))
                                     <span class="help-block">
@@ -96,10 +93,8 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('alamat') ? ' has-error' : '' }}">
-                            <label for="alamat" class="col-md-4 control-label">Alamat</label>
-
-                            <div class="col-md-6">
-                                <textarea class="form-control" name="alamat" required autofocus>{{ old('alamat') }}</textarea>
+                            <div class="col-md-13">
+                                <textarea class="form-control" name="alamat" placeholder="Alamat" required autofocus>{{ old('alamat') }}</textarea>
 
                                 @if ($errors->has('alamat'))
                                     <span class="help-block">
@@ -110,10 +105,8 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                            <div class="col-md-13">
+                                <input id="email" type="email" class="form-control" placeholder="E-Mail Address" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -124,10 +117,8 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                            <div class="col-md-13">
+                                <input id="password" type="password" class="form-control" placeholder="Password HajatKu" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -138,15 +129,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <div class="col-md-13">
+                                <input id="password-confirm" type="password" class="form-control" placeholder="Konfirmasi Password HajatKu" name="password_confirmation" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-40 col-md-offset-40">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
@@ -155,7 +144,6 @@
                     </form>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
