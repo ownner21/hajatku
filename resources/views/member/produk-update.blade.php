@@ -41,17 +41,17 @@
                   <div class="form-group row">
                     <label for="min_pemesanan" class="col-md-3 control-label">Pemesanan</label>
                     <div class="col-md-4">
-                    <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" value="{{$produk->min_pemesanan}}">
+                    <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" min="1" value="{{$produk->min_pemesanan}}">
                     </div>
                     <div class="col-md-4">
-                    <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" value="{{$produk->max_pemesanan}}">
+                    <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" min="1" value="{{$produk->max_pemesanan}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="harga" class="col-md-3 control-label">Harga Produk</label>
                     <div class="col-md-8">
-                    <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{$produk->harga}}">
+                    <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{$produk->harga}}" min="0">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -164,7 +164,7 @@
             <label for="id_lokasi" class="col-md-3 control-label">Lokasi</label>
             <div class="col-md-8">
             <select class="form-control" id="id_lokasi" name="id_lokasi" required>
-              <option selected disabled> Pilih Lokasi</option>
+              <option disabled> Pilih Lokasi</option>
               @foreach($lokasis as $lokasi)
               <option value="{{$lokasi->id}}"><b>{{$lokasi->wilayah}}</b> - {{$lokasi->lokasi}}</option>
               @endforeach
@@ -175,7 +175,7 @@
           <div class="row form-group">
             <label for="tagihan" class="col-md-3 control-label">tagihan</label>
             <div class="col-md-8">
-            <input type="text" class="form-control" id="tagihan" name="tagihan" placeholder="Tagihan">
+            <input type="number" class="form-control" id="tagihan" name="tagihan" min="0" placeholder="Tagihan">
             </div>
           </div>
       </div>
@@ -246,7 +246,7 @@
           <div class="row form-group">
             <label for="tagihan" class="col-md-3 control-label">tagihan</label>
             <div class="col-md-8">
-            <input type="text" class="form-control" id="tagihan" name="tagihan" placeholder="Tagihan">
+            <input type="number" class="form-control" id="tagihan" name="tagihan" min="0" placeholder="Tagihan">
             </div>
           </div>
 

@@ -31,6 +31,7 @@
                 <th>Pemasukan</th>
                 <th>Pengeluaran</th>
                 <th>Saldo Akhir</th>
+                <th>Waktu</th>
                 <th>Keterangan</th>
               </tr>
             </thead>
@@ -42,6 +43,7 @@
                 <td>{{$saldo->debit}}</td>
                 <td>{{$saldo->kredit}}</td>
                 <td>{{$saldo->saldo_akhir}}</td>
+                <td>{{$saldo->updated_at}}</td>
                 <td>{{$saldo->keterangan}}</td>
               </tr>
               @endforeach

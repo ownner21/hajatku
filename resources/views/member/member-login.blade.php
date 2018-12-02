@@ -93,8 +93,23 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><center>Login</center></div>
-
+                        <div class="panel-heading"><center>Login
+                           
+                        </center></div>
+                            @if (session('success'))
+                              <div class="">
+                                <div class="alert alert-success">
+                                    <center>{{ session('success') }}</center>
+                                </div>
+                              </div>
+                            @endif
+                            @if (session('gagal'))
+                              <div class="">
+                                <div class="alert alert-danger">
+                                    <center>{{ session('gagal') }}</center>
+                                </div>
+                              </div>
+                            @endif
                         <div class="panel-body">
                             <form class="form-horizontal" method="POST" action="{{ route('member.login') }}">
                                 {{ csrf_field() }}

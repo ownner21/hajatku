@@ -15,6 +15,11 @@ Route::post('/lokasi', 'Admin\LokasiController@store')->name('lokasi.tambah');
 Route::put('/lokasi/update', 'Admin\LokasiController@update')->name('lokasi.update');
 Route::delete('/lokasi/{id}', 'Admin\LokasiController@delete')->name('lokasi.hapus');
 
+Route::get('/bank', 'Admin\BankController@index');
+Route::post('/bank', 'Admin\BankController@store')->name('bank.tambah');
+Route::put('/bank/update', 'Admin\BankController@update')->name('bank.update');
+Route::delete('/bank/{id}', 'Admin\BankController@delete')->name('bank.hapus');
+
 Route::get('/member', 'Admin\MemberController@index');
 Route::get('/member/blok/{id}', 'Admin\MemberController@blok');
 Route::get('/member/aktif/{id}', 'Admin\MemberController@aktif');

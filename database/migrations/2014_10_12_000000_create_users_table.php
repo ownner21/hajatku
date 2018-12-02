@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('alamat');
-            $table->enum('status', ['Aktif', 'Blok'])->default('Aktif');
+            $table->enum('status', ['Daftar','Aktif', 'Blok'])->default('Daftar');
             $table->rememberToken();
             $table->timestamps();
         });

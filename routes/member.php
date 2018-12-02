@@ -7,6 +7,8 @@ Route::get('/register', 'Member\LoginController@register')->name('member.registe
 Route::post('/register', 'Member\LoginController@store')->name('member.register');
 Route::post('/logout', 'Member\LoginController@logout')->name('member.logout');
 
+Route::get('verify', 'Member\LoginController@verify')->name('signup.verify');
+
 Route::get('/produk', 'Member\ProdukController@index');
 Route::post('/produk', 'Member\ProdukController@store')->name('produk.tambah');
 

@@ -21,8 +21,7 @@
               
               <div class="row">
                 <div class="col-sm-12 col-md-4">
-                  <b>Saldo Anda Sekarang  </b> <br>
-                   Riwayat Top Anda
+                  Total Produk Anda Sekarang  <b>{{count($produks)}}</b>
                 </div>
               </div>
              
@@ -94,17 +93,17 @@
           <div class="form-group row">
             <label for="min_pemesanan" class="col-md-3 control-label">Pemesanan</label>
             <div class="col-md-4">
-            <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" value="{{old('min_pemesanan')}}" required>
+            <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" value="{{old('min_pemesanan')}}" min="1" required>
             </div>
             <div class="col-md-4">
-            <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" value="{{old('max_pemesanan')}}" required>
+            <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" value="{{old('max_pemesanan')}}" min="1" required>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="harga" class="col-md-3 control-label">Harga Produk</label>
             <div class="col-md-8">
-            <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{old('harga')}}" required>
+            <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{old('harga')}}" min="0" required>
             </div>
           </div>
           <div class="form-group row">
@@ -129,7 +128,7 @@
           <div class="form-group row">
             <label for="stokawal" class="col-md-3 control-label">Stok Awal</label>
             <div class="col-md-8">
-            <input type="text" class="form-control" name="stokawal" placeholder="Stok Awal" value="{{old('stokawal')}}" required>
+            <input type="number" min="1" class="form-control" name="stokawal" placeholder="Stok Awal" value="{{old('stokawal')}}" required>
             </div>
           </div>
 

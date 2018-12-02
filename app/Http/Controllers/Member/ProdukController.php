@@ -101,10 +101,21 @@ class ProdukController extends Controller
 
     public function storepengiriman(Request $request)
     {
-    	$pengiriman = new ProdukPengiriman;
-        $pengiriman->fill($request->all());
-        $pengiriman->save();
-        return back()->with('success',' Berhasil Menambah Lokasi Pengiriman');
+        $this->validate($request, [
+            'id_lokasi' => 'required',
+        ]);
+        $find = ProdukPengiriman::where(['id_produk'=>$request->id_produk,'id_lokasi'=>$request->id_lokasi])->first();
+        if (!empty($find)) {
+            $pengiriman = ProdukPengiriman::find($find->id);
+            $pengiriman->fill($request->all());
+            $pengiriman->update();
+            return back()->with('success',' Berhasil Mengubah Tagihan Pengiriman');
+        }else{
+            $pengiriman = new ProdukPengiriman;
+            $pengiriman->fill($request->all());
+            $pengiriman->save();
+            return back()->with('success',' Berhasil Menambah Lokasi Pengiriman');
+        }
     }
     public function updatepengiriman(Request $request)
     {
@@ -118,22 +129,23 @@ class ProdukController extends Controller
     	ProdukPengiriman::find($id)->delete();
     	return back()->with('success', 'Berhasil Hapus Lokasi');
     }
-    public function hapus($id_produk)
+    public function delete($id_produk)
     {
-    	Produk::where('id_produk', $id_produk)->delete();
+    	Produk::where('id', $id_produk)->delete();
     	ProdukPengiriman::where('id_produk', $id_produk)->delete();
     	$gambars = ProdukGambar::where('id_produk', $id_produk)->get();
     	foreach ($gambars as $gambar) {
 	        File::delete('images/album/'.$gambar->gambar);
+            $gambar->delete();
     	}
-    	$gambars->delete();
-    	return view('member/produk')->with('success', 'Berhasil Hapus Produk');
+    	return back()->with('success', 'Berhasil Hapus Produk');
     }
     public function stokproduk($id_produk)
     {
+        $produk = Produk::where('id',$id_produk)->select('nama_produk')->first();
         $stoks = StokProduk::where('id_produk', $id_produk)->orderBy('id','DESC')->get();
         $stokskarang = StokProduk::where('id_produk', $id_produk)->orderBy('id','DESC')->select('stok_akhir')->first();
-        return view('member.produk-stok', compact('stoks', 'id_produk', 'stokskarang'));
+        return view('member.produk-stok', compact('stoks', 'id_produk', 'stokskarang', 'produk'));
     }
     public function storestok(Request $request)
     {

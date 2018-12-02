@@ -12,7 +12,7 @@
 
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Lokasi 
+          <div class="panel-heading">Stok Produk <b>{{$produk->nama_produk}}</b>
 
           <span style="float: right">
 
@@ -61,16 +61,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="modal-title"> Tambah Lokasi</h4>
+        <h4 class="modal-title" id="modal-title"> Tambah Stok Produk</h4>
       </div>
       <form action="{{route('stok.tambah')}}" method="post">
       <div class="modal-body">
           {{ csrf_field() }}
           <input type="hidden" name="id_produk" value="{{$id_produk}}">
           <div class="row form-group">
-            <label for="debit" class="col-sm-3 control-label">Debit</label>
+            <label for="debit" class="col-sm-3 control-label">Debit Stok</label>
             <div class="col-sm-8">
-            <input type="number" class="form-control" id="debit" name="debit" placeholder="Debit" required>
+            <input type="number" class="form-control" id="debit" name="debit" placeholder="Debit" min="1" required>
             </div>
           </div>
       </div>
