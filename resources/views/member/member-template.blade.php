@@ -80,6 +80,7 @@
                     <ul class="nav navbar-nav navbar-left" style="margin-left: -110px;">
                         <!-- Authentication Links -->
                             <li><a href="{{url('member')}}">Dasboard</a></li>
+                            <li><a href="{{url('member/topup')}}">Topup</a></li>
                             <li><a href="{{url('member/produk')}}">Produk</a></li>
                             <li><a href="{{url('member/paket')}}" >Paket</a></li>
                             <li><a href="{{url('member/transaksi')}}">Transaksi</a></li>
@@ -93,6 +94,7 @@
                 <div class="col-sm-3">
                     <div class="list-group">
                       <a href="{{url('member')}}" class="list-group-item">Dasboard</a>
+                      <a href="{{url('member/topup')}}" class="list-group-item">Topup</a>
                       <a href="{{url('member/produk')}}" class="list-group-item">Produk</a>
                       <a href="{{url('member/paket')}}" class="list-group-item">Paket</a>
                       <a href="{{url('member/transaksi')}}" class="list-group-item">Transaksi</a>
@@ -105,7 +107,7 @@
             </div>
         </div>
 
-       
+
     </div>
 
     <!-- Scripts -->
