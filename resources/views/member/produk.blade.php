@@ -21,7 +21,7 @@
               
               <div class="row">
                 <div class="col-sm-12 col-md-4">
-                  Total Produk Anda Sekarang  <b>{{count($produks)}}</b>
+                  <p class="active"> Total Produk Anda Sekarang  <span class="badge">{{count($produks)}}</span></p>
                 </div>
               </div>
              
