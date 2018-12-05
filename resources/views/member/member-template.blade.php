@@ -82,6 +82,7 @@
                     <ul class="nav navbar-nav navbar-left" style="margin-left: -110px;">
                         <!-- Authentication Links -->
                             <li><a href="{{url('member')}}">Dasboard</a></li>
+                            <li><a href="{{url('member/topup')}}">Topup</a></li>
                             <li><a href="{{url('member/produk')}}">Produk</a></li>
                             <li><a href="{{url('member/paket')}}" >Paket</a></li>
                             <li><a href="{{url('member/transaksi')}}">Transaksi</a></li>
@@ -100,6 +101,7 @@
                     <p style="margin-left: 15px; margin-top: 10px;">Kategori</p>
                     <div class="list-group">
                       <a href="{{url('member')}}" class="list-group-item">Dasboard</a>
+                      <a href="{{url('member/topup')}}" class="list-group-item">Topup</a>
                       <a href="{{url('member/produk')}}" class="list-group-item">Produk</a>
                       <a href="{{url('member/paket')}}" class="list-group-item">Paket</a>
                       <a href="{{url('member/transaksi')}}" class="list-group-item">Transaksi</a>
@@ -112,7 +114,7 @@
             </div>
         </div>
 
-       
+
     </div>
     <!-- Footer -->
     <footer class="page-footer font-small blue-grey lighten-5"  style="background-color: rgb(220, 220, 220)">
