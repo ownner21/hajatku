@@ -32,12 +32,16 @@
                     <a class="navbar-brand">
                        HAJATKU
                     </a>
-                    <input style="margin-top: 10px; margin-left: 100px; width: 300px;" placeholder="Cari">
                 </div>
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                     </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Search" style="width: 20px">
+                        </div>
+                      </form>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">

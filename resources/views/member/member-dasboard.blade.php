@@ -1,5 +1,7 @@
 @extends('member.member-template')
-
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+@endsection
 @section('content')
   <div class="row">
     @if (session('success'))
@@ -21,7 +23,14 @@
           <div class="panel-heading">Dashboard</div>
 
           <div class="panel-body">
-              You are logged in!
+            <div class="row">
+              <div class="col-sm-6">
+                <img src="{{asset('images/produk/github_5bf808a56c7c6.png')}}" class="img-responsive " alt="Responsive image">
+              </div>
+              <div class="col-sm-6">You are logged in!</div>
+            </div>
+              
+              
           </div>
 
       </div>
