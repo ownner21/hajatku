@@ -1,5 +1,14 @@
 @extends('member.member-template')
 
+@section('menu')
+<div class="list-group">
+  <a href="{{url('member/produk')}}" class="list-group-item list-group-item-action active">
+    Produk Saya
+  </a>
+  <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target=".bs-example-modal-sm">Tambah Stok</a>
+</div>
+@endsection
+
 @section('content')
   <div class="row">
   	@if (session('success'))
@@ -13,12 +22,6 @@
     <div class="col-sm-12">
        <div class="panel panel-default">
           <div class="panel-heading">Stok Produk <b>{{$produk->nama_produk}}</b>
-
-          <span style="float: right">
-
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">Tambah</button>
-
-          </span>
           </div>
           <div class="panel-body">
               

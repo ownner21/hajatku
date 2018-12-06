@@ -56,12 +56,27 @@ Route::get('/cart/removeall', 'Member\CartController@removeall');
 Route::get('/cart/lunasi', 'Member\CartController@lunasi');
 
 Route::get('/transaksi', 'Member\TransaksiController@index');
+Route::get('/transaksi/pesan', 'Member\TransaksiController@pesan');
+Route::get('/transaksi/konfirmasi', 'Member\TransaksiController@konfirmasi');
+Route::get('/transaksi/pengerjaan', 'Member\TransaksiController@pengerjaan');
+Route::get('/transaksi/pengiriman', 'Member\TransaksiController@pengiriman');
+Route::get('/transaksi/kembali', 'Member\TransaksiController@kembali');
+Route::get('/transaksi/selesai', 'Member\TransaksiController@selesai');
+
 Route::get('/transaksi/tracking/{id}', 'Member\TransaksiController@transaksiid');
-Route::get('/transaksi/selesai/{id}', 'Member\TransaksiController@selesai');
+Route::get('/transaksi/selesai/{id}', 'Member\TransaksiController@konfirmasiselesai');
 
 Route::get('/penjualan', 'Member\PenjualanController@index');
+Route::get('/penjualan/pesan', 'Member\PenjualanController@ppesan');
+Route::get('/penjualan/konfirmasi', 'Member\PenjualanController@pkonfirmasi');
+Route::get('/penjualan/pengerjaan', 'Member\PenjualanController@ppengerjaan');
+Route::get('/penjualan/pengiriman', 'Member\PenjualanController@ppengiriman');
+Route::get('/penjualan/kembali', 'Member\PenjualanController@pkembali');
+Route::get('/penjualan/selesai', 'Member\PenjualanController@pselesai');
 Route::get('/penjualan/tracking/{id}', 'Member\PenjualanController@penjualanid');
 Route::get('/penjualan/konfirmasi/{id}', 'Member\PenjualanController@konfirmasi');
 Route::get('/penjualan/tidaksiap/{id}', 'Member\PenjualanController@tidaksiap');
 Route::get('/penjualan/pengerjaan/{id}', 'Member\PenjualanController@pengerjaan');
 Route::get('/penjualan/pengiriman/{id}', 'Member\PenjualanController@pengiriman');
+
+Route::get('/kategori/{kategori}', 'Member\MemberController@kategori');

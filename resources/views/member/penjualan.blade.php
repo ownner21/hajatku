@@ -1,9 +1,16 @@
 @extends('member.member-template')
 @section('menu')
 <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active">
+  <a href="{{url('member/penjualan')}}" class="list-group-item list-group-item-action active">
     Penjualan Saya
   </a>
+  <a href="{{url('member/penjualan/pesan')}}" class="list-group-item list-group-item-action">Proses Pesan</a>
+  <a href="{{url('member/penjualan/konfirmasi')}}" class="list-group-item list-group-item-action">Proses Konfirmasi</a>
+  <a href="{{url('member/penjualan/pengerjaan')}}" class="list-group-item list-group-item-action">Proses Pengerjaan</a>
+  <a href="{{url('member/penjualan/pengiriman')}}" class="list-group-item list-group-item-action">Proses Pengiriman</a>
+  <a href="{{url('member/penjualan/selesai')}}" class="list-group-item list-group-item-action">Proses Selesai</a>
+  <a href="{{url('member/penjualan/kembali')}}" class="list-group-item list-group-item-action">Proses Kembali</a>
+
 </div>
 @endsection
 @section('content')

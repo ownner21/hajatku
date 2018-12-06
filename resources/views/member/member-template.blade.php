@@ -74,7 +74,7 @@
                             </li>
 
                             {{-- <li><a href="{{url('member/topup')}}">Saldo <span class="badge"></span></a></li> --}}
-                            <li><a href="{{url('member/cart')}}">Keranjang</a></li>
+                            <li><a href="{{url('member/cart')}}"><i class="material-icons">shopping_cart</i></a></li>
                         @endif
                     </ul>
                 </div>

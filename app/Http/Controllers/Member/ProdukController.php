@@ -64,13 +64,14 @@ class ProdukController extends Controller
     }
     public function produkid($id_produk)
     {
+        $kategoris = Kategori::where('status', 'Tampil')->get();
     	$produk = Produk::find($id_produk);
     	$produkgambars = ProdukGambar::where('id_produk', $produk->id)->get();
     	$produkpengirimans = ProdukPengiriman::where('id_produk', $produk->id)
 					    	->join('lokasis', 'produk_pengirimen.id_lokasi', '=', 'lokasis.id')
 					    	->select('wilayah', 'lokasi', 'tagihan')
 					    	->get();
-    	return view('member.produk-id', compact('produk', 'produkgambars', 'produkpengirimans'));
+    	return view('member.produk-id', compact('kategoris','produk', 'produkgambars', 'produkpengirimans'));
     }
     public function storegambar(Request $request)
     {
