@@ -27,7 +27,6 @@
               <div class="col-sm-6">
                 <img src="{{asset('images/produk/github_5bf808a56c7c6.png')}}" class="img-responsive " alt="Responsive image">
               </div>
-              <div class="col-sm-6">You are logged in!</div>
             </div>
               
               

@@ -74,7 +74,7 @@
                             </li>
 
                             {{-- <li><a href="{{url('member/topup')}}">Saldo <span class="badge"></span></a></li> --}}
-                            <li><a href="{{url('member/cart')}}">Cart</a></li>
+                            <li><a href="{{url('member/cart')}}">Keranjang</a></li>
                         @endif
                     </ul>
                 </div>
@@ -89,7 +89,6 @@
                             <li><a href="{{url('member/paket')}}" >Paket</a></li>
                             <li><a href="{{url('member/transaksi')}}">Transaksi</a></li>
                             <li><a href="{{url('member/penjualan')}}">Penjualan</a></li>
-                            <li><a href="{{url('member/topup')}}">Top Up</a></li>
                     </ul>
                 </div>
             </div>
