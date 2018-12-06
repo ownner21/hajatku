@@ -17,14 +17,6 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Styles -->
         <style>
-            html, body {
-                background: 'wallpaperpostingan.jpg';
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
 
             .full-height {
                 height: 100vh;
@@ -83,11 +75,10 @@
             @endif
 
             <div class="content">
-                <p>Ojo bingun lan ojo gupuh, Seng Penting Yakin</p>
-                <p>Selamat datang, selamat berbelanja</p>
                 <div class="title m-b-md">
                     Hajatku
                 </div> 
+                <p>Selamat datang, selamat berbelanja</p>
             </div>
             <div class="container" style="margin-left: 10px;">
             <div class="row">
@@ -116,7 +107,6 @@
 
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label for="email" class="col-md-4 control-label"><p class="fa fa-user"></p></label>
-
                                     <div class="col-md-6">
                                         <input id="email" type="email" class="form-control" placeholder="E-Mail Addres" name=" email" value="{{ old('email') }}" required autofocus>
 

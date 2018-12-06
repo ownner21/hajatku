@@ -20,7 +20,7 @@
     @endif
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Dashboard</div>
+          <div class="panel-heading">Hot Products</div>
 
           <div class="panel-body">
             <div class="row">

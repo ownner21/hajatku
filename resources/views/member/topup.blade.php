@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Topup 
+          <div class="panel-heading">Riwayat Top Anda 
 
           <span style="float: right">
 
@@ -23,8 +23,7 @@
               
               <div class="row">
                 <div class="col-sm-12 col-md-4">
-                  <b>Saldo Anda Sekarang {{$saldo}} </b> <br>
-                   Riwayat Top Anda
+                  <b>Saldo Anda Sekarang Rp.{{$saldo}} </b> <br>
                 </div>
               </div>
              
