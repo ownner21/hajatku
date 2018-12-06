@@ -31,24 +31,7 @@
       </div>
     @endif
     <div class="col-sm-12">
-<<<<<<< HEAD
-       <div class="panel panel-default">
-          <div class="panel-heading">Hot Products</div>
-
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <img src="{{asset('images/produk/github_5bf808a56c7c6.png')}}" class="img-responsive " alt="Responsive image">
-              </div>
-            </div>
-              
-              
-          </div>
-
-      </div>
-=======
             <img class="img-rounded" src="{{asset('images/tampilan/tampilansementara.PNG')}}" style="width: 100%;">
->>>>>>> 3489acb37861fd356adec5a8c736174936c41a46
     </div>
   </div>
 
@@ -81,10 +64,12 @@
           </div>
         </div>
       </div>
-      @else
-      Produk Tidak Tersedia
       @endif
       @endforeach
+
+      @if(empty($produks))
+      Prodok Tidak Ada yang Tersedia
+      @endif
 
 
     </div>
