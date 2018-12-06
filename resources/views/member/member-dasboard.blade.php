@@ -2,6 +2,18 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 @endsection
+
+@section('menu')
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    Dasboard
+  </a>
+  @foreach($kategoris as $kategori)
+  <a href="#" class="list-group-item list-group-item-action">{{$kategori->kategori}}</a>
+  @endforeach
+</div>
+@endsection
+
 @section('content')
   <div class="row">
     @if (session('success'))
@@ -19,21 +31,7 @@
       </div>
     @endif
     <div class="col-sm-12">
-       <div class="panel panel-default">
-          <div class="panel-heading">Hot Products</div>
-
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <img src="{{asset('images/produk/github_5bf808a56c7c6.png')}}" class="img-responsive " alt="Responsive image">
-              </div>
-              <div class="col-sm-6">You are logged in!</div>
-            </div>
-              
-              
-          </div>
-
-      </div>
+            <img class="img-rounded" src="{{asset('images/tampilan/tampilansementara.PNG')}}" style="width: 100%;">
     </div>
   </div>
 
@@ -66,8 +64,12 @@
           </div>
         </div>
       </div>
+      @else
+      Produk Tidak Tersedia
       @endif
       @endforeach
+
+
     </div>
 
 <div class="modal fade" id="modalupdate" tabindex="-1" role="dialog" aria-labelledby="modalupdate">

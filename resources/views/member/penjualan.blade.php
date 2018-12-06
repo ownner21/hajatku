@@ -1,5 +1,11 @@
 @extends('member.member-template')
-
+@section('menu')
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    Penjualan Saya
+  </a>
+</div>
+@endsection
 @section('content')
   <div class="row">
     <div class="col-sm-12">
