@@ -93,30 +93,21 @@
                 </div>
             </div>
         </nav>                     
-        <div class="container">
-            <img class="img-rounded" src="{{asset('images/tampilan/tampilansementara.PNG')}}" style="width: 1145px; height: 300px; margin-bottom: 25px;">
-        </div>
+        
         <div class="container-fluid">
-            <div class="row">
+            <div class="row" style="min-height: 345px;">
                 <div class="col-sm-3">
-                    <p style="margin-left: 15px; margin-top: 10px;">Kategori</p>
-                    <div class="list-group">
-                      <a href="{{url('member')}}" class="list-group-item">Dasboard</a>
-                      <a href="{{url('member/topup')}}" class="list-group-item">Topup</a>
-                      <a href="{{url('member/produk')}}" class="list-group-item">Produk</a>
-                      <a href="{{url('member/paket')}}" class="list-group-item">Paket</a>
-                      <a href="{{url('member/transaksi')}}" class="list-group-item">Transaksi</a>
-                      <a href="{{url('member/penjualan')}}" class="list-group-item">Penjualan</a>
-                    </div>
+                    @yield('menu')
                 </div>
                 <div class="col-sm-9">
-                     @yield('content')
+                    @yield('content')
                 </div>
             </div>
         </div>
 
 
     </div>
+
     <!-- Footer -->
     <footer class="page-footer font-small blue-grey lighten-5"  style="background-color: rgb(220, 220, 220)">
 
