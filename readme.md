@@ -29,3 +29,6 @@ Atau <br>
 
 App\Models\Admin::create(['email'=>'admin@admin.com', 'password'=>bcrypt("passwordString")])
 
+<h4> Developer </h4>
+Penggunaan icon bisa menggunakan reverensi <br>
+<a href="https://material.io/tools/icons/?style=baseline " style="text-decoration: none;">https://material.io/tools/icons/?style=baseline </a><br>

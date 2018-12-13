@@ -30,21 +30,23 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand">
-                       <img class="img-rounded" src="{{asset('images/tampilan/HAJATKU.png')}}" style="width: 50px;">
+                       <img src="{{asset('images/tampilan/s.png')}}" style="width: 100px;">
                     </a>
-                    <div class="col-lg-6">
-                        <div class="input-group" style="margin-top: 8px; margin-left: 30px; width: 600px;">
-                            <input type="text" class="form-control" placeholder="Cari Produk atau Jasa">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">Cari</button>
-                                </span>
-                        </div><!-- /input-group -->
-                    </div><!-- /.col-lg-6 -->
+
+                  
                 </div>
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                    </ul>
+
+                    <!-- /input-group -->
+                    <form class="navbar-form navbar-left">
+                         <div class="input-group" style="margin-top: 8px;  width: 600px;">
+                        <input type="text" class="form-control" placeholder="Cari Produk atau Jasa">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">Cari</button>
+                            </span>
+                    </div>
+                      </form>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -72,14 +74,14 @@
                             </li>
 
                             {{-- <li><a href="{{url('member/topup')}}">Saldo <span class="badge"></span></a></li> --}}
-                            <li><a href="{{url('member/cart')}}">Cart</a></li>
+                            <li><a href="{{url('member/cart')}}"><i class="material-icons">shopping_cart</i></a></li>
                         @endif
                     </ul>
                 </div>
             </div>
-            <div class="container"  style="margin-left: 185px;">
+            <div class="container">
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left" style="margin-left: -110px;">
+                    <ul class="nav navbar-nav navbar-left">
                         <!-- Authentication Links -->
                             <li><a href="{{url('member')}}">Dasboard</a></li>
                             <li><a href="{{url('member/topup')}}">Topup</a></li>
@@ -87,35 +89,25 @@
                             <li><a href="{{url('member/paket')}}" >Paket</a></li>
                             <li><a href="{{url('member/transaksi')}}">Transaksi</a></li>
                             <li><a href="{{url('member/penjualan')}}">Penjualan</a></li>
-                            <li><a href="{{url('member/topup')}}">Top Up</a></li>
                     </ul>
                 </div>
             </div>
         </nav>                     
-        <div class="container">
-            <img class="img-rounded" src="{{asset('images/tampilan/tampilansementara.PNG')}}" style="width: 1145px; height: 300px; margin-bottom: 25px;">
-        </div>
+        
         <div class="container-fluid">
-            <div class="row">
+            <div class="row" style="min-height: 345px;">
                 <div class="col-sm-3">
-                    <p style="margin-left: 15px; margin-top: 10px;">Kategori</p>
-                    <div class="list-group">
-                      <a href="{{url('member')}}" class="list-group-item">Dasboard</a>
-                      <a href="{{url('member/topup')}}" class="list-group-item">Topup</a>
-                      <a href="{{url('member/produk')}}" class="list-group-item">Produk</a>
-                      <a href="{{url('member/paket')}}" class="list-group-item">Paket</a>
-                      <a href="{{url('member/transaksi')}}" class="list-group-item">Transaksi</a>
-                      <a href="{{url('member/penjualan')}}" class="list-group-item">Penjualan</a>
-                    </div>
+                    @yield('menu')
                 </div>
                 <div class="col-sm-9">
-                     @yield('content')
+                    @yield('content')
                 </div>
             </div>
         </div>
 
 
     </div>
+
     <!-- Footer -->
     <footer class="page-footer font-small blue-grey lighten-5"  style="background-color: rgb(220, 220, 220)">
 

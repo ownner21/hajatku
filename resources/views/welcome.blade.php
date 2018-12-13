@@ -16,6 +16,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Styles -->
+<<<<<<< HEAD
         <!-- Bootstrap -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <!-- Bootstrap -->
@@ -39,6 +40,8 @@
         
         
 
+=======
+>>>>>>> ca54920ea6686acc29b6cdf32ce0451b541c3f00
         <style>
             .full-height {
                 height: 100vh;
@@ -100,7 +103,11 @@
                 <div class="title m-b-md">
                      <img class="img-rounded" src="{{asset('images/tampilan/HAJATKU.png')}}" style="width: 250px;">
                 </div> 
+<<<<<<< HEAD
                 <p>Selamat datang, selamat berbelanja <br> anda senang kami pun senang</p>
+=======
+                <p>Selamat datang, selamat berbelanja <br> anda senang kamipun senang</p>
+>>>>>>> ca54920ea6686acc29b6cdf32ce0451b541c3f00
                 {{-- <p>Ojo bingun lan ojo gupuh, Seng Penting Yakin</p> --}}
             </div>
             <div class="container" style="margin-left: 10px;">

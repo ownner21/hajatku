@@ -31,7 +31,8 @@ class ProdukController extends Controller
     {
     	$produk = new Produk;
         $produk->fill($request->all());
-    	$produk['id_member'] = Auth::user()->id;
+        $produk['id_member'] = Auth::user()->id;
+    	$produk['slug_produk'] = str_slug($request->nama_produk, '-');
     	$produk->save();
 
         $stok = new StokProduk;
@@ -57,18 +58,20 @@ class ProdukController extends Controller
     {
     	$produk = Produk::find($request->id);
         $produk->fill($request->all());
+        $produk['slug_produk'] = str_slug($request->nama_produk, '-');
     	$produk->update();
     	return redirect('member/produk/id/'.$produk->id)->with('success', 'Berhasil Update Produk');
     }
     public function produkid($id_produk)
     {
+        $kategoris = Kategori::where('status', 'Tampil')->get();
     	$produk = Produk::find($id_produk);
     	$produkgambars = ProdukGambar::where('id_produk', $produk->id)->get();
     	$produkpengirimans = ProdukPengiriman::where('id_produk', $produk->id)
 					    	->join('lokasis', 'produk_pengirimen.id_lokasi', '=', 'lokasis.id')
 					    	->select('wilayah', 'lokasi', 'tagihan')
 					    	->get();
-    	return view('member.produk-id', compact('produk', 'produkgambars', 'produkpengirimans'));
+    	return view('member.produk-id', compact('kategoris','produk', 'produkgambars', 'produkpengirimans'));
     }
     public function storegambar(Request $request)
     {

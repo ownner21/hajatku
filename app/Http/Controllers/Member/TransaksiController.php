@@ -23,12 +23,43 @@ class TransaksiController extends Controller
     	$transaksis = ProdukPemesanan::where('id_member', Auth::user()->id)->orderBy('id','DESC')->get();
     	return view('member.transaksi', compact('transaksis'));
     }
+    public function pesan()
+    {
+        $transaksis = ProdukPemesanan::where('id_member', Auth::user()->id)->where('status', 'Pesan')->orderBy('id','DESC')->get();
+        return view('member.transaksi', compact('transaksis'));
+    }
+    public function konfirmasi()
+    {
+        $transaksis = ProdukPemesanan::where('id_member', Auth::user()->id)->where('status', 'Konfirmasi')->orderBy('id','DESC')->get();
+        return view('member.transaksi', compact('transaksis'));
+    }
+    public function pengerjaan()
+    {
+        $transaksis = ProdukPemesanan::where('id_member', Auth::user()->id)->where('status', 'Pengerjaan')->orderBy('id','DESC')->get();
+        return view('member.transaksi', compact('transaksis'));
+    }
+    public function pengiriman()
+    {
+        $transaksis = ProdukPemesanan::where('id_member', Auth::user()->id)->where('status', 'Pengiriman')->orderBy('id','DESC')->get();
+        return view('member.transaksi', compact('transaksis'));
+    }
+    public function selesai()
+    {
+        $transaksis = ProdukPemesanan::where('id_member', Auth::user()->id)->where('status', 'selesai')->orderBy('id','DESC')->get();
+        return view('member.transaksi', compact('transaksis'));
+    }
+    public function kembali()
+    {
+        $transaksis = ProdukPemesanan::where('id_member', Auth::user()->id)->where('status', 'Kembali')->orderBy('id','DESC')->get();
+        return view('member.transaksi', compact('transaksis'));
+    }
+
     public function transaksiid($id)
     {
     	$transaksi = ProdukPemesanan::find($id);
     	return view('member.transaksi-id', compact('transaksi'));
     }
-    public function selesai($id)
+    public function konfirmasiselesai($id)
     {
         $penjualan = ProdukPemesanan::find($id);
         $penjualan['waktu_selesai'] = Carbon::now();

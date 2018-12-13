@@ -1,5 +1,15 @@
 @extends('member.member-template')
-
+@section('menu')
+<div class="list-group">
+  <a href="{{url('member/produk')}}" class="list-group-item list-group-item-action active">
+    Produk Saya
+  </a>
+  <a href="{{url('member/produk/id/'.$produk->id)}}" class="list-group-item list-group-item-action">
+    Lihat Produk ini
+  </a>
+  <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target=".bs-tambah-modal-sm">Tambah Produk</a>
+</div>
+@endsection
 @section('content')
   <div class="row">
     @if (session('success'))
@@ -254,6 +264,88 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade bs-tambah-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-title"> Tambah Produk</h4>
+      </div>
+      <form class="form-horizontal" action="{{route('produk.tambah')}}" method="post">
+      <div class="modal-body">
+          {{ csrf_field() }}
+          <div class="form-group row">
+            <label for="nama_produk" class="col-md-3 control-label">Nama Produk</label>
+            <div class="col-md-8">
+            <input type="text" class="form-control" name="nama_produk" placeholder="Nama Produk" value="{{old('nama_produk')}}" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="deskripsi" class="col-md-3 control-label">Deskripsi Produk</label>
+            <div class="col-md-8">
+            <textarea type="text" class="form-control" name="deskripsi" placeholder="Deskripsi Produk" required>{{old('deskripsi')}}</textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="lokasi" class="col-md-3 control-label">Lokasi Produk</label>
+            <div class="col-md-8">
+            <input type="text" class="form-control" name="lokasi" placeholder="Lokasi Produk" value="{{old('lokasi')}}" required>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="min_pemesanan" class="col-md-3 control-label">Pemesanan</label>
+            <div class="col-md-4">
+            <input type="number" class="form-control" name="min_pemesanan" placeholder="Min Pemesanan" value="{{old('min_pemesanan')}}" min="1" required>
+            </div>
+            <div class="col-md-4">
+            <input type="number" class="form-control" name="max_pemesanan" placeholder="Max Pemesanan" value="{{old('max_pemesanan')}}" min="1" required>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="harga" class="col-md-3 control-label">Harga Produk</label>
+            <div class="col-md-8">
+            <input type="number" class="form-control" name="harga" placeholder="Harga Satuan" value="{{old('harga')}}" min="0" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="kode_produk" class="col-md-3 control-label">Kode Produk</label>
+            <div class="col-md-8">
+            <input type="text" class="form-control" name="kode_produk" placeholder="Kode Produk (Opsional)" value="{{old('kode_produk')}}">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="id_kategori" class="col-md-3 control-label">Kategori</label>
+            <div class="col-md-8">
+             <select class="form-control" id="id_kategori" name="id_kategori" required>
+              <option selected disabled> Pilih Kategori</option>
+              @foreach($kategoris as $kategori)
+              <option value="{{$kategori->id}}">{{$kategori->kategori}}</option>
+              @endforeach
+            </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="stokawal" class="col-md-3 control-label">Stok Awal</label>
+            <div class="col-md-8">
+            <input type="number" min="1" class="form-control" name="stokawal" placeholder="Stok Awal" value="{{old('stokawal')}}" required>
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Tambah Produk</button>
       </div>
       </form>
     </div>

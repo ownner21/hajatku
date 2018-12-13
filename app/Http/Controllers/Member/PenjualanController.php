@@ -23,6 +23,37 @@ class PenjualanController extends Controller
     	$penjualans = ProdukPemesanan::where('id_penjual', Auth::user()->id)->orderBy('id','DESC')->get();
     	return view('member.penjualan', compact('penjualans'));
     }
+    public function ppesan()
+    {
+        $penjualans = ProdukPemesanan::where('id_penjual', Auth::user()->id)->where('status', 'Pesan')->orderBy('id','DESC')->get();
+        return view('member.penjualan', compact('penjualans'));
+    }
+    public function pkonfirmasi()
+    {
+        $penjualans = ProdukPemesanan::where('id_penjual', Auth::user()->id)->where('status', 'Konfirmasi')->orderBy('id','DESC')->get();
+        return view('member.penjualan', compact('penjualans'));
+    }
+    public function ppengerjaan()
+    {
+        $penjualans = ProdukPemesanan::where('id_penjual', Auth::user()->id)->where('status', 'Pengerjaan')->orderBy('id','DESC')->get();
+        return view('member.penjualan', compact('penjualans'));
+    }
+    public function ppengiriman()
+    {
+        $penjualans = ProdukPemesanan::where('id_penjual', Auth::user()->id)->where('status', 'Pengiriman')->orderBy('id','DESC')->get();
+        return view('member.penjualan', compact('penjualans'));
+    }
+    public function pselesai()
+    {
+        $penjualans = ProdukPemesanan::where('id_penjual', Auth::user()->id)->where('status', 'selesai')->orderBy('id','DESC')->get();
+        return view('member.penjualan', compact('penjualans'));
+    }
+    public function pkembali()
+    {
+        $penjualans = ProdukPemesanan::where('id_penjual', Auth::user()->id)->where('status', 'Kembali')->orderBy('id','DESC')->get();
+        return view('member.penjualan', compact('penjualans'));
+    }
+
     public function penjualanid($id)
     {
     	$penjualan = ProdukPemesanan::find($id);

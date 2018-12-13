@@ -1,16 +1,19 @@
 @extends('member.member-template')
 
+@section('menu')
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    Produk Saya
+  </a>
+  <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target=".bs-example-modal-sm">Tambah Produk</a>
+</div>
+@endsection
+
 @section('content')
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
           <div class="panel-heading">Produk 
-
-          <span style="float: right">
-
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">Tambah Produk</button>
-
-          </span>
           </div>
           <div class="panel-body">
               @if (session('success'))

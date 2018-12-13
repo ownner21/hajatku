@@ -18,6 +18,7 @@ class CreateProduksTable extends Migration
             $table->integer('id_member');
             $table->integer('id_kategori');
             $table->string('nama_produk');
+            $table->string('slug_produk');
             $table->text('deskripsi');
             $table->text('lokasi')->nullable();
             $table->string('min_pemesanan')->nullable();

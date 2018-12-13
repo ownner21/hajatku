@@ -1,78 +1,92 @@
 @extends('member.member-template')
-@section('css')
-<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
-@endsection
-
 @section('menu')
-<div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active">
-    Semua Kategori
-  </a>
-  @foreach($kategoris as $kategori)
-  <a href="{{url('member/kategori/'.$kategori->kategori)}}" class="list-group-item list-group-item-action">{{$kategori->kategori}}</a>
-  @endforeach
-</div>
+@foreach($produkgambars as $produkgambar)
+  <img src="{{asset('images/produk/'.$produkgambar->gambar)}}" class="img-thumbnails" alt="..." width="100%">
+@endforeach
 @endsection
-
 @section('content')
   <div class="row">
-    @if (session('success'))
-      <div class="col-sm-12">
-        <div class="alert alert-success">
-            {!! session('success') !!}
-        </div>
-      </div>
-    @endif
-    @if (session('gagal'))
-      <div class="col-sm-12">
-        <div class="alert alert-danger">
-            {!! session('gagal') !!}
-        </div>
-      </div>
-    @endif
     <div class="col-sm-12">
-            <img class="img-rounded" src="{{asset('images/tampilan/tampilansementara.PNG')}}" style="width: 100%;">
-    </div>
-  </div>
+       <div class="panel panel-default">
+          <div class="panel-body">
+              @if (session('success'))
+                  <div class="alert alert-success">
+                      {!! session('success') !!}
+                  </div>
+              @endif
+              
+              <div class="row">
+                <div class="col-sm-12">
+                  <h2 style="margin-top: 0px">{{$produk->nama_produk}} </h2>
+                </div>
+                <div class="col-sm-12">
+                 <table class="table">
+                   <tr>
+                     <th>Nama Produk</th>
+                     <td><b>{{$produk->nama_produk}}</b></td>
+                   </tr>
+                   <tr>
+                     <th>Deskripsi Produk</th>
+                     <td>{{$produk->deskripsi}}</td>
+                   </tr>
+                   <tr>
+                     <th>Lokasi Produk</th>
+                     <td>{{$produk->lokasi}}</td>
+                   </tr>
+                   <tr>
+                     <th>Min Pemesanan</th>
+                     <td>{{$produk->min_pemesanan}}</td>
+                   </tr>
+                   <tr>
+                     <th>Max Pemesanan</th>
+                     <td>{{$produk->max_pemesanan}}</td>
+                   </tr>
+                   <tr>
+                     <th>Harga Produk</th>
+                     <td>{{$produk->harga}}</td>
+                   </tr>
+                   <tr>
+                     <th>Kode Produk</th>
+                     <td>{{$produk->kode_produk}}</td>
+                   </tr>
+                 </table>
 
-    <div class="row">
-      @foreach($produks as $produk)
-      <?php
-        $pgambar = App\Models\ProdukGambar::where('id_produk', $produk->id)->first();
-        $plokasi = App\Models\ProdukPengiriman::where('id_produk', $produk->id)->first();
-        $pstok = App\Models\StokProduk::where('id_produk', $produk->id)->orderBy('id','DESC')->first();
-      ?>
-      @if(!empty($pgambar) && !empty($pstok) && !empty($plokasi) && $pstok->stok_akhir!=0 && $pstok->stok_akhir >= $produk->min_pemesanan)
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail" style="background-color:white">
-          <img src="{{asset('images/produk/'.$pgambar->gambar)}}">
-          <div class="caption">
-            <h3>{{$produk->nama_produk}}</h3>
-            <p>{{$produk->deskripsi}}</p>
-            <p>Harga <b>{{$produk->harga}}</b></p>
-            <p>Stok  <b>{{$pstok->stok_akhir}} ({{$produk->min_pemesanan}}-{{$produk->max_pemesanan}})</b></p>
-            <p>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalupdate"
+                 <hr>
+
+                 Tarif Transport
+                  <table class="table">
+                    <tr>
+                        <th>Wilayah</th>
+                        <th>Lokasi</th>
+                        <th>Tagihan</th>
+                    </tr>
+                    @foreach($produkpengirimans as $produkpengiriman)
+                    <tr>
+                        <td>{{$produkpengiriman->wilayah}}</td>
+                        <td>{{$produkpengiriman->lokasi}}</td>
+                        <td>{{$produkpengiriman->tagihan}}</td>
+                    </tr>
+                    @endforeach
+                  </table>
+
+                  <hr>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalupdate" style="min-width: 200px" 
                      data-id="{{$produk->id}}" 
                      data-namaproduk="{{$produk->nama_produk}}" 
                      data-deskripsi="{{$produk->deskripsi}}" 
                      data-minbeli="{{$produk->min_pemesanan}}" 
                      data-maxbeli="{{$produk->max_pemesanan}}"
                      >Beli</button>
-              {{-- <a href="{{url('member/cart/store/produk/'.$produk->id)}}" class="btn btn-primary" role="button">Beli</a> --}}
-              <a href="{{url($produk->slug_produk.'-i.'.$produk->id)}}" class="btn btn-default" role="button">Detail</a></p>
+
+                </div>
+              </div>
+             
           </div>
-        </div>
+
       </div>
-      @endif
-      @endforeach
-
-      @if(empty($produks))
-      Prodok Tidak Ada yang Tersedia
-      @endif
-
-
     </div>
+  </div>
+
 
 <div class="modal fade" id="modalupdate" tabindex="-1" role="dialog" aria-labelledby="modalupdate">
   <div class="modal-dialog" role="document">

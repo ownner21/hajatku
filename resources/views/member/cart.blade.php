@@ -45,12 +45,12 @@
                 <td style="text-align: center;">{{$n++}}</td>
                 <td>{{$cart->nama_produk}}</td>
                 <td>{{$cart->qty}}</td>
-                <td>{{$cart->harga}}</td>
+                <td>{{number_format($cart->harga,0,",",".")}}</td>
                 <td>{{$cart->wilayah.' - '.$cart->lokasi}}</td>
                 <td>{{$cart->tagihan}}</td>
                 
                 <td style="text-align: right;">{{number_format($cart->harga*$cart->qty+$cart->tagihan,0,",",".")}}</td>
-                  <td><a href="{{url('member/cart/remove/'.$cart->id)}}" class="btn btn-danger btn-sm">Hapus</a></td>
+                  <td><a href="{{url('member/cart/remove/'.$cart->id)}}" class="btn btn-warning btn-sm">Hapus</a></td>
               </tr>
               
               @endforeach
