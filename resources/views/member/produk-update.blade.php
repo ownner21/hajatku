@@ -1,4 +1,8 @@
 @extends('member.member-template')
+@section('css')
+  <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+  <script src="{{ asset('js/dropzone.js') }}"></script>
+@endsection
 @section('menu')
 <div class="list-group">
   <a href="{{url('member/produk')}}" class="list-group-item list-group-item-action active">
@@ -141,11 +145,11 @@
           <div class="panel-body">
             <div class="row">
             @foreach($produkgambars as $produkgambar)
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                   <div class="thumbnail">
                     <img src="{{asset('images/produk/'.$produkgambar->gambar)}}" alt="...">
                     <div class="caption">
-                      <p><a href="{{url('member/produk/gambar/delete/'.$produkgambar->id)}}" class="btn btn-danger btn-sm" role="button">Hapus</a> <a href="{{asset('images/produk/'.$produkgambar->gambar)}}" class="btn btn-default btn-sm" role="button">Lihat</a></p>
+                      <p><a href="{{url('member/produk/gambar/delete/'.$produkgambar->id)}}" class="btn btn-danger btn-sm" role="button">Hapus</a> <a href="{{asset('images/produk/'.$produkgambar->gambar)}}" class="btn btn-default btn-sm" role="button" target="_blank">Lihat</a></p>
                     </div>
                   </div>
                 </div>
@@ -174,7 +178,7 @@
             <label for="id_lokasi" class="col-md-3 control-label">Lokasi</label>
             <div class="col-md-8">
             <select class="form-control" id="id_lokasi" name="id_lokasi" required>
-              <option disabled> Pilih Lokasi</option>
+              <option value="" disabled selected> Pilih Lokasi</option>
               @foreach($lokasis as $lokasi)
               <option value="{{$lokasi->id}}"><b>{{$lokasi->wilayah}}</b> - {{$lokasi->lokasi}}</option>
               @endforeach
@@ -205,24 +209,16 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="modal-title"> Gambar Tambah</h4>
       </div>
-      <form class="form-horizontal" action="{{route('produk.gambar.tambah')}}" enctype="multipart/form-data" method="post">
       <div class="modal-body">
-          {{ csrf_field() }}
-          <input type="hidden" name="id_produk" value="{{$produk->id}}">
+      <form class="dropzone form-horizontal" action="{{route('produk.gambar.tambah')}}" enctype="multipart/form-data" method="post">
+        <input type="hidden" value="{{$produk->id}}" name="id_produk">
+        {{ csrf_field() }}
 
-          <div class="row form-group">
-            <label for="id_lokasi" class="col-md-3 control-label">Gambar</label>
-            <div class="col-md-8">
-              <input type="file" name="gambar[]" multiple class="form-control">
-            </div>
-          </div>
-
+      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" >Tambah Gambar</button>
       </div>
-      </form>
     </div>
   </div>
 </div>

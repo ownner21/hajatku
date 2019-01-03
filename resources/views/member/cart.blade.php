@@ -24,7 +24,7 @@
           	<thead>
           		<tr>
           			<th style="text-align: center;">#</th>
-          			<th>Nama Produk</th>
+          			<th>Nama Produk / Paket</th>
           			<th>Qty</th>
                 <th>Harga</th>
                 <th>Pengiriman</th>
@@ -40,23 +40,32 @@
           		@foreach($carts as $cart)
               <tr>
                 <?php
-                  $total += $cart->harga*$cart->qty+$cart->tagihan;
+                  
+                if (!empty($cart->id_produk)) {
+                  $produk = App\Models\Produk::where('id', $cart->id_produk)->select('nama_produk as produk', 'harga')->first();
+                  $tagihan = App\Models\ProdukPengiriman::where('id', $cart->id_pengiriman)->select('tagihan', 'id_lokasi')->first();
+                } else {
+                  $produk = App\Models\Paket::where('id', $cart->id_paket)->select('nama_paket as produk', 'harga')->first();
+                  $tagihan = App\Models\PaketPengiriman::where('id', $cart->id_pengiriman)->select('tagihan', 'id_lokasi')->first();
+                }
+                  $lokasi = App\Models\Lokasi::where('id', $tagihan->id_lokasi)->select('wilayah','lokasi')->first();
+                  
+                $total += $produk->harga*$cart->qty+$tagihan->tagihan;
+                  
                 ?>
                 <td style="text-align: center;">{{$n++}}</td>
-                <td>{{$cart->nama_produk}}</td>
+                <td>{{(!empty($produk))? $produk->produk: 'Produk/Paket Terjadi Perubahan'}}</td>
                 <td>{{$cart->qty}}</td>
-                <td>{{number_format($cart->harga,0,",",".")}}</td>
-                <td>{{$cart->wilayah.' - '.$cart->lokasi}}</td>
-                <td>{{$cart->tagihan}}</td>
+                <td>{{number_format($produk->harga,0,",",".")}}</td>
+                <td>{{(!empty($lokasi))? $lokasi->wilayah.' - '.$lokasi->lokasi : 'Produk/Paket Terjadi Perubahan'}}</td>
+                <td>{{(!empty($tagihan))? number_format($tagihan->tagihan,0,",","."): 'Produk/Paket Terjadi Perubahan'}}</td>
                 
-                <td style="text-align: right;">{{number_format($cart->harga*$cart->qty+$cart->tagihan,0,",",".")}}</td>
+                <td style="text-align: right;">{{number_format($produk->harga*$cart->qty+$tagihan->tagihan,0,",",".")}}</td>
                   <td><a href="{{url('member/cart/remove/'.$cart->id)}}" class="btn btn-warning btn-sm">Hapus</a></td>
               </tr>
               
               @endforeach
 
-              
-              
 
             @if(count($carts)!=0)
   			    <tr>

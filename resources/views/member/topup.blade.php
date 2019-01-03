@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-sm-12">
        <div class="panel panel-default">
-          <div class="panel-heading">Riwayat Top Anda 
+          <div class="panel-heading">Riwayat Top Up Anda 
 
           </div>
           <div class="panel-body">
@@ -27,7 +27,7 @@
               
               <div class="row">
                 <div class="col-sm-12 col-md-4">
-                  <b>Saldo Anda Sekarang Rp.{{$saldo}} </b> <br>
+                  <b>Saldo Anda Sekarang Rp.{{number_format($saldo,0,",",".")}} </b> <br>
                 </div>
               </div>
              

@@ -28,4 +28,16 @@ class HomeController extends Controller
                             ->get();
         return view('member.produk-slug', compact('produk', 'produkgambars', 'produkpengirimans'));
     }
+    public function paketid($id_paket)
+    {
+        // $paket = Paket::find($id_paket);
+        // $isipakets = IsiPaket::where('id_paket', $id_paket)
+        //             ->join('produks', 'isi_pakets.id_produk', '=', 'produks.id')
+        //             ->get();
+        // $ppengirimans = PaketPengiriman::where('id_paket', $id_paket)
+        //                     ->join('lokasis', 'paket_pengirimen.id_lokasi', '=', 'lokasis.id')
+        //                     ->select('wilayah', 'lokasi', 'tagihan')
+        //                     ->get();
+        // return view('front.paket-id', compact('paket', 'isipakets', 'ppengirimans'));
+    }
 }

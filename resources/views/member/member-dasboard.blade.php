@@ -5,7 +5,7 @@
 
 @section('menu')
 <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active">
+  <a href="{{url('member')}}" class="list-group-item list-group-item-action active">
     Semua Kategori
   </a>
   @foreach($kategoris as $kategori)
@@ -34,7 +34,7 @@
             <img class="img-rounded" src="{{asset('images/tampilan/tampilansementara.PNG')}}" style="width: 100%;">
     </div>
   </div>
-
+  <br>
     <div class="row">
       @foreach($produks as $produk)
       <?php
@@ -43,22 +43,26 @@
         $pstok = App\Models\StokProduk::where('id_produk', $produk->id)->orderBy('id','DESC')->first();
       ?>
       @if(!empty($pgambar) && !empty($pstok) && !empty($plokasi) && $pstok->stok_akhir!=0 && $pstok->stok_akhir >= $produk->min_pemesanan)
-      <div class="col-sm-6 col-md-4">
+      <div class="col-sm-6 col-md-3">
         <div class="thumbnail" style="background-color:white">
           <img src="{{asset('images/produk/'.$pgambar->gambar)}}">
           <div class="caption">
             <h3>{{$produk->nama_produk}}</h3>
             <p>{{$produk->deskripsi}}</p>
             <p>Harga <b>{{$produk->harga}}</b></p>
-            <p>Stok  <b>{{$pstok->stok_akhir}} ({{$produk->min_pemesanan}}-{{$produk->max_pemesanan}})</b></p>
+            <p>Stok  <b>{{$pstok->stok_akhir}} (min : {{$produk->min_pemesanan}} max : {{$produk->max_pemesanan}})</b></p>
             <p>
+              @if($produk->id_member != Auth::user('member')->id)
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalupdate"
                      data-id="{{$produk->id}}" 
+                     data-beli="produk"
                      data-namaproduk="{{$produk->nama_produk}}" 
                      data-deskripsi="{{$produk->deskripsi}}" 
                      data-minbeli="{{$produk->min_pemesanan}}" 
                      data-maxbeli="{{$produk->max_pemesanan}}"
-                     >Beli</button>
+                     data-harga= "{{$produk->harga}}"
+                       >Beli</button>
+              @endif
               {{-- <a href="{{url('member/cart/store/produk/'.$produk->id)}}" class="btn btn-primary" role="button">Beli</a> --}}
               <a href="{{url($produk->slug_produk.'-i.'.$produk->id)}}" class="btn btn-default" role="button">Detail</a></p>
           </div>
@@ -68,11 +72,52 @@
       @endforeach
 
       @if(empty($produks))
-      Prodok Tidak Ada yang Tersedia
+      Produk Tidak Ada yang Tersedia
       @endif
-
-
     </div>
+
+    <hr>
+    <div class="row">
+        @foreach($pakets as $paket)
+        <?php
+          $isipakets = App\Models\IsiPaket::where('id_paket', $paket->id)->get();
+          if (!empty($isipakets)) {
+            $produk = App\Models\Produk::where('id', $isipakets[0]->id_produk)->first();
+            $pgambar = App\Models\ProdukGambar::where('id_produk', $produk->id)->first();
+          }
+          $plokasi = App\Models\PaketPengiriman::where('id_paket', $paket->id)->first();
+        ?>
+        @if(!empty($pgambar) &&  !empty($plokasi))
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail" style="background-color:white">
+            <img src="{{asset('images/produk/'.$pgambar->gambar)}}">
+            <div class="caption">
+              <h3>{{$paket->nama_paket}}</h3>
+              <p>{{$paket->deskripsi}}</p>
+              <p>Harga <b>{{$paket->harga}}</b></p>
+              <p>Lokasi <b>{{$paket->lokasi}}</b></p>
+              <p>
+                @if($paket->id_member != Auth::user('member')->id)
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalupdate"
+                       data-id="{{$paket->id}}" 
+                       data-beli="paket"
+                       data-namaproduk="{{$paket->nama_paket}}" 
+                       data-deskripsi="{{$paket->deskripsi}}"
+                       data-harga= "{{$paket->harga}}"
+                       >Beli</button>
+                @endif
+                {{-- <a href="{{url('member/cart/store/produk/'.$produk->id)}}" class="btn btn-primary" role="button">Beli</a> --}}
+                <a href="{{url('member/paket/id/'.$paket->id)}}" class="btn btn-default" role="button">Detail</a></p>
+            </div>
+          </div>
+        </div>
+        @endif
+        @endforeach
+  
+        @if(empty($produks))
+        Paket Tidak Ada yang Tersedia
+        @endif
+      </div>
 
 <div class="modal fade" id="modalupdate" tabindex="-1" role="dialog" aria-labelledby="modalupdate">
   <div class="modal-dialog" role="document">
@@ -85,18 +130,26 @@
       <div class="modal-body">
           {{ csrf_field() }}
           <input type="hidden" name="id_produk" id="id_produk">
+          <input type="hidden" name="id_paket" id="id_paket">
+          <input type="hidden" name="type" id="type">
 
           <div class="row form-group">
-            <label for="wilayah" class="col-sm-4 control-label" id="label-nama"></label>
+            <label for="label-nama-isi" class="col-sm-4 control-label" id="label-nama"></label>
             <div class="col-sm-8" id="label-nama-isi">
             </div>
           </div>
           <div class="row form-group">
-            <label for="wilayah" class="col-sm-4 control-label"> Deskripsi</label>
+            <label for="label-nama-deskripsi" class="col-sm-4 control-label"> Deskripsi</label>
             <div class="col-sm-8" id="label-nama-deskripsi">
             </div>
           </div>
-          <div class="row form-group">
+          <div class="row form-group" id="ppaket">
+              <label for="produkpaket" class="col-sm-4 control-label"> Produk</label>
+              <div class="col-sm-8" id="produkpaket">
+                  <ul class="list-group" id="isiprodukpaket"></ul>
+              </div>
+          </div>
+          <div class="row form-group" id="jumlah">
             <label for="wilayah" class="col-sm-4 control-label"> Jumlah / Qty</label>
             <div class="col-sm-8">
               <input type="number" class="form-control" name="qty" placeholder="qty" id="minbeli">
@@ -109,10 +162,15 @@
             </div>
           </div>
           <div class="row form-group">
-            <label for="lokasi" class="col-sm-4 control-label">Tagihan</label>
+            <label for="lokasi" class="col-sm-4 control-label">Tagihan Pengiriman</label>
             <div class="col-sm-8" id="tagihan">
             </div>
           </div>
+          <div class="row form-group">
+              <label for="tagihanp" class="col-sm-4 control-label" id="label-tagihanp"></label>
+              <div class="col-sm-8" id="tagihanp">
+              </div>
+            </div>
           <div class="row form-group">
             <label for="lokasi" class="col-sm-4 control-label">Alamat Detail</label>
             <div class="col-sm-8" id="tagihan">
@@ -138,10 +196,13 @@ $('#modalupdate').on('show.bs.modal', function (event) {
   var id = button.data('id');
   var namaproduk = button.data('namaproduk');
   var deskripsi = button.data('deskripsi');
+  var beli = button.data('beli');
+  var harga = button.data('harga');
   var minbeli = button.data('minbeli');
   var maxbeli = button.data('maxbeli');
-  console.log(id);
-  $.get('{{ url('member/cart/pengiriman/produk')}}/'+id, function(data){
+
+  //menampilkan pengiriman tersedia
+  $.get('{{ url('member/cart/pengiriman/')}}/'+beli+'/'+id, function(data){
       $('#tagihan').empty();
       $('#pilihlokasi').empty();
       $('#pilihlokasi').append("<option disabled selected>Pilih Pengiriman</option>");
@@ -149,23 +210,57 @@ $('#modalupdate').on('show.bs.modal', function (event) {
           $('#pilihlokasi').append("<option value=" +element.id_pengiriman+ ">" + element.wilayah +" "+ element.lokasi + "</option>");
       });
   });
+
   var modal = $(this)
 
-  modal.find('.modal-title').text('Pilih Lokasi Pengiriman')
-  modal.find('#label-nama').text('Nama Produk')
-  modal.find('#label-nama-isi').text(namaproduk)
-  modal.find('#label-nama-deskripsi').text(deskripsi)
-  modal.find('#minbeli').val(minbeli)
-  modal.find('#minbeli').attr("min",minbeli);
-  modal.find('#minbeli').attr("max",maxbeli);
-  modal.find('#id_produk').val(id)
+  //aksi data modal default
+  modal.find('.modal-title').text('Pilih Lokasi Pengiriman');
+  
+  modal.find('#type').val(beli);
+  modal.find('#label-nama-isi').text(namaproduk);
+  modal.find('#label-nama-deskripsi').text(deskripsi);
+  modal.find('#tagihanp').text(harga);
+  document.getElementById("beli").innerHTML="Beli";
+
+  //id untuk mnampilkan produk dalam paket
+  document.getElementById('ppaket').style.display = 'none';
+
+  if (beli=='paket') {
+    document.getElementById('jumlah').style.display = 'none';
+    document.getElementById('ppaket').style.display = 'block';
+
+    modal.find('#id_paket').val(id);
+    modal.find('#label-nama').text('Nama Paket');
+    modal.find('#label-tagihanp').text('Tagihan paket');
+
+    $.get('{{ url('member/cart/produkpaket/')}}/'+id, function(data){
+      $('#isiprodukpaket').empty();
+      $.each(data, function(index, element){
+          $('#isiprodukpaket').append('<li class="list-group-item"><span class="badge">'+element.harga+'</span>'+element.nama_produk+'</li>');
+      });
+    });
+  } else {
+    document.getElementById('jumlah').style.display = 'block';
+    modal.find('#id_produk').val(id);
+    modal.find('#minbeli').val(minbeli);
+    modal.find('#minbeli').attr("min",minbeli);
+    modal.find('#minbeli').attr("max",maxbeli);
+    modal.find('#label-nama').text('Nama Produk');
+    modal.find('#label-tagihanp').text('Tagihan Produk');
+  }
+  
 })
+
 $('#pilihlokasi').on('change', function(e){
     var id = e.target.value;
+    var type = document.getElementById("type").value;
     $('#tagihan').empty();
-    $.get('{{ url('/member/cart/tagihanpengiriman/')}}/'+id, function(data){
-        $('#tagihan').text(data);
+    $.get('{{ url('/member/cart/tagihanpengiriman/')}}/'+type+'/'+id, function(data){
+        $('#tagihan').text(data['tagihan']);
+        var tagihanp = $("#tagihanp").text();
+        var penjumlahan = parseInt(data['tagihan'])+parseInt(tagihanp);
        document.getElementById("beli").removeAttribute("disabled");
+       document.getElementById("beli").innerHTML="Beli ("+penjumlahan+")";
     });
 });
 </script>

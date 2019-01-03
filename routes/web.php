@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index');
 Route::get('/{slug}', 'HomeController@produkid');
 Route::get('/kategori/{kategori}', 'MemberController@kategori');
+Route::get('/paket/{id_paket}', 'HomeController@paketid');
 
 // Auth::routes();
 

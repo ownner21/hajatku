@@ -75,24 +75,22 @@ class ProdukController extends Controller
     }
     public function storegambar(Request $request)
     {
+        $this->validate($request, [
+            'file' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
 
-        $files = $request->file('gambar');
-        foreach ($files as $file) {
-            $filenamewithextension = $file->getClientOriginalName();
+        if ($request->hasFile('file')){
+            $filenamewithextension = $request->file('file')->getClientOriginalName();
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            $extension =$file->getClientOriginalExtension();
-            $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            $file->move('images/produk',$filenametostorefoto);
-           
-        	$gambar = new ProdukGambar;
-	        $gambar->fill($request->all());
-            $gambar['id_produk'] = $request->id_produk;
-            $gambar['gambar'] = $filenametostorefoto;
-	        $gambar->save();
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+            $request->file('file')->move('images/produk',$filenametostore);
 
+            $gambar = new ProdukGambar;
+            $gambar->fill($request->all());
+            $gambar['gambar'] = $filenametostore;
+            $gambar->save();
         }
-        return  back()->with('success', 'Berhasil Menambahkan Foto');
-
     }
     public function hapusgambar($id)
     {

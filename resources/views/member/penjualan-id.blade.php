@@ -112,14 +112,25 @@
               <th>Produk</th>
               <td>
                 <?php 
-                  $produk = json_decode($penjualan->produk);
-                  $cek = App\Models\Produk::find($produk->id);
-                  $lokasi = App\Models\Lokasi::find($penjualan->id_lokasi);
+                    $lokasi = App\Models\Lokasi::find($penjualan->id_lokasi);
                 ?>
-                @if(!empty($cek))
-                 <a href="{{url('member/produk/id/'.$produk->id)}}"><b>{{$produk->nama_produk}}</b> {{$produk->deskripsi}}</a>
+                @if(!empty($penjualan->nama_produk))
+                    <?php 
+                      $produk = json_decode($penjualan->produk);
+                      $cek = App\Models\Produk::find($produk->id);
+                    ?>
+                    @if(!empty($cek))
+                    <a href="{{url('member/produk/id/'.$produk->id)}}"><b>{{$produk->nama_produk}}</b> {{$produk->deskripsi}}</a>
+                    @else
+                    <b>{{$produk->nama_produk}}</b> {{$produk->deskripsi}}
+                    @endif
                 @else
-                 <b>{{$produk->nama_produk}}</b> {{$produk->deskripsi}}
+                      <?php
+                        $produks = json_decode($penjualan->produk);
+                      ?>
+                      @foreach ($produks as $produk)
+                      <a href="{{url('member/produk/id/'.$produk->id)}}" style="color: black"><b>{{$produk->nama_produk}}</b> - <br>{{$produk->deskripsi}}</a><br>
+                      @endforeach
                 @endif
               </td>
             </tr>

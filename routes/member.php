@@ -12,7 +12,7 @@ Route::get('verify', 'Member\LoginController@verify')->name('signup.verify');
 Route::get('/produk', 'Member\ProdukController@index');
 Route::post('/produk', 'Member\ProdukController@store')->name('produk.tambah');
 
-Route::post('/produk/gambar', 'Member\ProdukController@storegambar')->name('produk.gambar.tambah');
+Route::post('/produk/gambar/tambah', 'Member\ProdukController@storegambar')->name('produk.gambar.tambah');
 Route::get('/produk/gambar/delete/{id}', 'Member\ProdukController@hapusgambar');
 
 Route::post('/produk/pengiriman', 'Member\ProdukController@storepengiriman')->name('produk.pengiriman.tambah');
@@ -48,9 +48,10 @@ Route::put('/paket/pengiriman/update', 'Member\PaketController@updatepengiriman'
 Route::get('/paket/pengiriman/delete/{id}', 'Member\PaketController@hapuspengiriman');
 
 Route::get('/cart', 'Member\CartController@index');
-Route::post('/cart/store', 'Member\CartController@tambahproduk')->name('cart.store');
+Route::post('/cart/store', 'Member\CartController@storecart')->name('cart.store');
 Route::get('/cart/pengiriman/{type}/{id}', 'Member\CartController@tampilpengiriman');
-Route::get('/cart/tagihanpengiriman/{id_pengiriman}', 'Member\CartController@tampiltagihan');
+Route::get('/cart/produkpaket/{id}', 'Member\CartController@tampilprodukpaket');
+Route::get('/cart/tagihanpengiriman/{type}/{id_pengiriman}', 'Member\CartController@tampiltagihan');
 Route::get('/cart/remove/{id}', 'Member\CartController@remove');
 Route::get('/cart/removeall', 'Member\CartController@removeall');
 Route::get('/cart/lunasi', 'Member\CartController@lunasi');

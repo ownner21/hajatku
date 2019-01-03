@@ -70,6 +70,7 @@
                   </table>
 
                   <hr>
+                  @if($produk->id_member != Auth::user('member')->id)
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalupdate" style="min-width: 200px" 
                      data-id="{{$produk->id}}" 
                      data-namaproduk="{{$produk->nama_produk}}" 
@@ -77,6 +78,7 @@
                      data-minbeli="{{$produk->min_pemesanan}}" 
                      data-maxbeli="{{$produk->max_pemesanan}}"
                      >Beli</button>
+                  @endif
 
                 </div>
               </div>

@@ -29,7 +29,7 @@
               
               <div class="row">
                 <div class="col-sm-12">
-                  <b>Saldo Anda Sekarang {{$saldomember}} </b> <br>
+                  <b>Saldo Anda Sekarang {{number_format($saldomember,0,",",".")}} </b> <br>
                    Riwayat Pemasukan Dan Pengeluaran Saldo Anda
                 </div>
               </div>
