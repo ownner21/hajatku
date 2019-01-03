@@ -16,7 +16,6 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Styles -->
-<<<<<<< HEAD
         <!-- Bootstrap -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <!-- Bootstrap -->
@@ -37,11 +36,6 @@
         <!-- Custom stlylesheet -->
         <link href="{{ asset('css/style2.css') }}" rel="stylesheet" type="text/css">
         <!-- Custom stlylesheet -->
-        
-        
-
-=======
->>>>>>> ca54920ea6686acc29b6cdf32ce0451b541c3f00
         <style>
             .full-height {
                 height: 100vh;
@@ -103,11 +97,7 @@
                 <div class="title m-b-md">
                      <img class="img-rounded" src="{{asset('images/tampilan/HAJATKU.png')}}" style="width: 250px;">
                 </div> 
-<<<<<<< HEAD
-                <p>Selamat datang, selamat berbelanja <br> anda senang kami pun senang</p>
-=======
                 <p>Selamat datang, selamat berbelanja <br> anda senang kamipun senang</p>
->>>>>>> ca54920ea6686acc29b6cdf32ce0451b541c3f00
                 {{-- <p>Ojo bingun lan ojo gupuh, Seng Penting Yakin</p> --}}
             </div>
             <div class="container" style="margin-left: 10px;">
@@ -278,7 +268,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/ct3.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/ct3.JPG')}}">
                                                 <div class="product-label">
                                                     <span class="sale">-20%</span>
                                                     <span class="new">NEW</span>
@@ -310,7 +300,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/ct1.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/ct1.JPG')}}">
                                                 <div class="product-label">
                                                     <span class="new">NEW</span>
                                                 </div>
@@ -341,7 +331,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/ct3.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/ct3.JPG')}}">
                                                 <div class="product-label">
                                                     <span class="sale">-20%</span>
                                                 </div>
@@ -367,7 +357,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/ss2.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/ss2.JPG')}}">
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">Seserahan</p>
@@ -395,7 +385,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/ss1.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/ss1.JPG')}}">
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">Seserahan</p>
@@ -467,7 +457,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/ct3.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/ct3.JPG')}}">
                                                 <div class="product-label">
                                                     <span class="sale">-20%</span>
                                                     <span class="new">NEW</span>
@@ -499,7 +489,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/jj4.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/jj4.JPG')}}">
                                                 <div class="product-label">
                                                     <span class="new">NEW</span>
                                                 </div>
@@ -530,7 +520,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/ak1.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/ak1.JPG')}}">
                                                 <div class="product-label">
                                                     <span class="sale">-30%</span>
                                                 </div>
@@ -556,7 +546,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/jj1.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/jj1.JPG')}}">
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">Jajanan</p>
@@ -584,7 +574,7 @@
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
-                                                <img class="img-rounded" src="{{asset('images/produk/jj3.JPG')}}">
+                                                <img class="img-rounded" src="{{asset('images/tampilan/jj3.JPG')}}">
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">Jajanan</p>

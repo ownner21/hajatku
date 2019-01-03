@@ -26,7 +26,7 @@ class MemberController extends Controller
     }
     public function kategori($kategori)
     {
-        $kategori = Kategori::where('kategori', $kategori)->first();
+        $kategori = Kategori::where('slug_kategori', $kategori)->first();
         $kategoris = Kategori::where('status', 'Tampil')->get();
         $produks = Produk::where('id_member', '!=', Auth::user()->id)->where('id_kategori', $kategori->id )->get();
         return view('member.member-dasboard', compact('produks', 'kategoris'));

@@ -9,7 +9,7 @@
     Semua Kategori
   </a>
   @foreach($kategoris as $kategori)
-  <a href="{{url('member/kategori/'.$kategori->kategori)}}" class="list-group-item list-group-item-action">{{$kategori->kategori}}</a>
+  <a href="{{url('member/kategori/'.$kategori->slug_kategori)}}" class="list-group-item list-group-item-action">{{$kategori->kategori}}</a>
   @endforeach
 </div>
 @endsection

@@ -15,7 +15,7 @@ class HomeController extends Controller
         if (Auth::check()){
             return redirect('member/');
         }
-        return view('front.index');
+        return view('welcome');
     }
     public function produkid($slug)
     {

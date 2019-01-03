@@ -15,6 +15,7 @@ class CreateKategorisTable extends Migration
     {
         Schema::create('kategoris', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('slug_kategori');
             $table->string('kategori');
             $table->enum('status',['Tampil', 'Sembunyi'])->default('Sembunyi');
         });

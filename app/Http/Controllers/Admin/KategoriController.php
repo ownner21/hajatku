@@ -31,6 +31,7 @@ class KategoriController extends Controller
         $this->validasi($request);
         $kategori = new Kategori();
         $kategori->fill($request->all());
+        $kategori['slug_kategori'] = str_slug($request->kategori, '-');
         $kategori->save();
         return back()->with('success', 'Berhasil Menambahkan Kategori');
     }
@@ -40,6 +41,7 @@ class KategoriController extends Controller
         $this->validasi($request);
         $kategori = Kategori::find($request->id);
         $kategori->fill($request->all());
+        $kategori['slug_kategori'] = str_slug($request->kategori, '-');
         $kategori->save();
         return back()->with('success', 'Berhasil Mengupdate Kategori');
     }

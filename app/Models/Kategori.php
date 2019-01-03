@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kategori extends Model
 {
      protected $fillable = [
-	    'kategori','status'
+	    'slug_kategori','kategori','status'
     ];
     public $timestamps = false;
 }
